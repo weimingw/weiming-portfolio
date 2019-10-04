@@ -1,0 +1,62 @@
+@import '../../../common/colors.scss';
+
+.aboutMe {
+    
+}
+
+.aboutMe * {
+    line-height: 2.5em;
+}
+
+.aboutMe-mainIcon.aboutMe-mainIcon {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: 1.25rem;
+}
+
+.aboutMe-lineIcon.aboutMe-lineIcon {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 1.25rem;
+}
+
+.aboutMe-entry:nth-child(3n) .aboutMe-mainIcon,
+.aboutMe-line:nth-child(3n) .aboutMe-lineIcon {
+    color: $blue;
+}
+
+.aboutMe-entry:nth-child(3n+1) .aboutMe-mainIcon,
+.aboutMe-line:nth-child(3n+1) .aboutMe-lineIcon {
+    color: $green;
+}
+
+.aboutMe-entry:nth-child(3n+2) .aboutMe-mainIcon,
+.aboutMe-line:nth-child(3n+2) .aboutMe-lineIcon {
+    color: $purple;
+}
+
+.aboutMe-entry:nth-child(3n) .aboutMe-mainIcon.svg,
+.aboutMe-line:nth-child(3n) .aboutMe-lineIcon.svg {
+    background-color: $blue;
+}
+
+.aboutMe-entry:nth-child(3n+1) .aboutMe-mainIcon.svg,
+.aboutMe-line:nth-child(3n+1) .aboutMe-lineIcon.svg {
+    background-color: $green;
+}
+
+.aboutMe-entry:nth-child(3n+2) .aboutMe-mainIcon.svg,
+.aboutMe-line:nth-child(3n+2) .aboutMe-lineIcon.svg {
+    background-color: $purple;
+}
+
+.aboutMe-header {
+    display: flex;
+    align-items: center;
+}
+
+.aboutMe-line {
+    display: flex;
+    align-items: center;
+    padding-left: 4.25rem;
+}

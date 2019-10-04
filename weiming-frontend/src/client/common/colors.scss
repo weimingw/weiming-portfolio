@@ -1,0 +1,40 @@
+$dark: #383838;
+$light: #BBBBBB;
+$green: #98C379;
+$red: #E06455;
+$orange: #D19A66;
+$yellow: #DAB570;
+$blue: #61AFEF;
+$purple: #9A7FD5;
+
+$darkMinus1: lighten( $dark, 2.5% );
+
+$darkPlus1: darken( $dark, 2.5% );
+$darkPlus2: darken( $dark, 5% );
+$darkPlus3: darken( $dark, 7.5% );
+
+$formItemBorderColor: darken( $light, 40% );
+
+.green {
+    color: $green;
+}
+
+.red {
+    color: $red;
+}
+
+.blue {
+    color: $blue;
+}
+
+.purple {
+    color: $purple;
+}
+
+.yellow {
+    color: $yellow;
+}
+
+.orange {
+    color: $orange;
+}

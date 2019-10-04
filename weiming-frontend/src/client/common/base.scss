@@ -1,0 +1,123 @@
+@import './font.scss';
+@import './colors.scss';
+@import './layouts.scss';
+@import './sizes.scss';
+@import './functions.scss';
+@import './spacing.scss';
+@import './forms/forms.scss';
+@import './forms/fields.scss';
+@import './forms/buttons.scss';
+@import './forms/inputs.scss';
+@import './forms/icons.scss';
+
+@import './animations/index.scss';
+
+$scrollbarWidth: 1rem;
+
+html {
+    font-size: 10px;
+    font-family: Arima Madurai;
+}
+
+html * {
+    box-sizing: border-box;
+    margin: 0em;
+    // min-width: 0;
+}
+
+html *:not(input, textarea) {
+    line-height: 2em;
+}
+
+body {
+    font-size: 1.4rem;
+    color: $light;
+    background: $dark;
+}
+
+select {
+    background: $dark;
+    border: none;
+    border-bottom: 0.1rem solid $formItemBorderColor;
+}
+
+a {
+    text-decoration: none;
+    color: $blue;
+}
+
+a:hover {
+    opacity: 0.8;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: $scrollbarWidth;
+    border-radius: 50%;
+    border: 0rem solid $dark;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: lighten( $dark, 5% ); 
+    border-radius: $scrollbarWidth / 2;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb { 
+    background: darken( $dark, 7.5% ); 
+    border-radius: $scrollbarWidth / 2;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: $darkPlus2; 
+}
+
+h2 {
+    color: $green;
+    font-size: 2.2rem;
+}
+
+h3 {
+    color: $orange;
+    font-size: 1.8rem;
+}
+
+h4 {
+    color: $yellow;
+    font-size: 1.6rem;
+}
+
+h5 {
+    color: $purple;
+    font-size: 1.4rem;
+}
+
+h6 {
+    font-size: 1em;
+}
+
+.pageHeader {
+    margin-bottom: 0.75rem;
+}
+
+.svg {
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    background-size: 90%;
+    background-position: 50% 50%;
+}
+
+.clickable {
+    cursor: pointer;
+    
+}
+
+.clickable:hover {
+    background: transparentize( $light, 0.9 );
+}
+
+ul {
+    padding-left: 2rem;
+}

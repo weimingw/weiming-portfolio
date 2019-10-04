@@ -1,0 +1,89 @@
+[{
+    "key": "intro",
+    "title": "Software Engineer. Gets Excited By JavaScript and Design Patterns",
+    "content": [{
+        "text": "I mostly deal with frontend, with a bit of middle stack mixed in. If my workplace had a Node backend, I would have gone full-stack a long time ago."
+    }],
+    "icon": "laptop-code"
+}, {
+    "key": "coding-style",
+    "title": "My coding philosophy",
+    "content": [{
+        "text": "I wish to make social impact by writing code quickly in a clean, maintainable way through elegant and scalable designs."
+    }, {
+        "text": "JavaScript is my favorite language because it fits my philosophy the best. It is relatively performant if written well, allowing scalability. It is a terse language that allows for flexible designs, making it easily maintainable. Any device with a web browser can run it, allowing great potential for social impact."
+    }],
+    "icon": "javascript"
+}, {
+    "key": "gaming",
+    "title": "My inspirations",
+    "content": [{
+        "text": "Every impressive effect in a video game has a few lines of logic that made it happen, and that sparked my curious mind about applied logic. StarCraft was the best mentor, because it bundled a simple modding tool that let me get a feel for if-else statements."
+    }],
+    "icon": "gamepad"
+}, {
+    "key": "education",
+    "title": "My formal education in computer science",
+    "content": [{
+        "text": "Two high school courses taught me Visual Basic and Java in high school."
+    }, {
+        "text": "College trained me in core concepts and algorithms, along with Python, C, and Android."
+    }, {
+        "text": "An internship taught me C# and Microsoft .NET."
+    }],
+    "icon": "user-graduate"
+}, {
+    "key": "self-teaching",
+    "title": "My pride in self-education",
+    "content": [{
+        "text": "A list of what I've taught myself:"
+    }, {
+        "text": "JavaScript",
+        "icon": "javascript"
+    }, {
+        "text": "Node + Express",
+        "icon": "node"
+    }, {
+        "text": "Vue.js",
+        "icon": "vue"
+    }, {
+        "text": "React.js and Redux",
+        "icon": "react"
+    }, {
+        "text": "Django",
+        "icon": "python"
+    }, {
+        "text": "Ruby (on Rails)",
+        "icon": "code"
+    }, {
+        "text": "Though to be fair, I've only dabbled slightly in Django and Rails."
+    }],
+    "icon": "chalkboard-teacher"
+}, {
+    "key": "economics",
+    "title": "My second major",
+    "content": [{
+        "text": "Economics was my second major, with a focus on behavior and finance. I found out my affinity for it in high school in AP Economics. I was a natural at understanding the models, but I always sucked at the stats side."
+    }],
+    "icon": "chart-line"
+}, {
+    "key": "interests",
+    "title": "My interests",
+    "content": [{
+        "text": "I tend to spend most of my time indoors, since I find life more fulfilling when I set goals and achieve them rather than go on any physical adventures."
+    }, {
+        "text": "Most of the time I am watching semi-educational videos on Youtube, dabbling on a new library or framework, or cooking. (I REALLY like cooking)."
+    }],
+    "icon": "cooking"
+}, {
+    "key": "goals",
+    "title": "My goals",
+    "content": [{
+        "text": "In 5 years, I want to be someone I admire and respect right now, due to the breadth of knowledge and skills that I would have gained while continuing an attitude of self-improvement."
+    }, {
+        "text": "I also expect myself to be back in the company of family and friends in my hometown, Las Vegas. Out of everything in life, they are the most important things, and nothing should keep me away."
+    }, {
+        "text": "It would be nice if I one day learned to sight-read music though."
+    }],
+    "icon": "vegas"
+}]

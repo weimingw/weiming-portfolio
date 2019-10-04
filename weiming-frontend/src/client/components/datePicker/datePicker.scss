@@ -1,0 +1,64 @@
+// For anyone who discovers my code:
+// Please disregard the anarchistic mess that is the styling of this file
+// This is 99% overriding styling set by the original vuejs-datepicker
+
+@import '../../common/colors.scss';
+
+.datePicker {
+    
+}
+
+.datePicker-calendar {
+    * {
+        font-size: 1.3rem;
+    }
+
+    &.vdp-datepicker__calendar {
+        width: 28rem;
+        background: $darkPlus2;
+        border: none;
+    }
+
+    &.vdp-datepicker__calendar .cell {
+        display: inline-flex;
+        height: 4rem;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &.vdp-datepicker__calendar .cell:hover {
+        background: $dark;
+    }
+
+    &.vdp-datepicker__calendar .cell:not(.blank):not(.disabled).day:hover,
+    &.vdp-datepicker__calendar .cell:not(.blank):not(.disabled).month:hover,
+    &.vdp-datepicker__calendar .cell:not(.blank):not(.disabled).year:hover {
+        border: none;
+    }
+
+    &.vdp-datepicker__calendar .cell.day-header {
+        font-size: 1.3rem;
+    }
+
+    &.vdp-datepicker__calendar header .prev:not(.disabled):hover, 
+    &.vdp-datepicker__calendar header .next:not(.disabled):hover, 
+    &.vdp-datepicker__calendar header .up:not(.disabled):hover {
+        background: $dark;
+    }
+
+    &.vdp-datepicker__calendar.rightAlign {
+        right: 0;
+    }
+
+    &.vdp-datepicker__calendar.showAbove {
+        bottom: 100%;
+    }
+}
+
+.datePicker-input {
+    padding-left: 0.5rem;
+}
+
+.datePicker-input-inline {
+    
+}

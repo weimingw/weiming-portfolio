@@ -1,0 +1,2 @@
+release: python ./migrations/scripts/run_all_migrations.py
+web: gunicorn main:app

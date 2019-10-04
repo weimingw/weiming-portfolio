@@ -1,0 +1,131 @@
+@import '../../common/colors.scss';
+
+$sidebarWidth: 30rem;
+$hoverColor: lighten($dark, 2.5%);
+
+.sidebar {
+    will-change: transform;
+    position: absolute;
+    z-index: 500000;
+    width: $sidebarWidth;
+    height: 100%;
+    overflow-y: auto;
+    padding: 0 0.75rem;
+
+    display: flex;
+    flex-direction: column;
+    background: $darkPlus1;
+    box-shadow: 0rem 1rem 2rem $darkMinus1;
+    
+    transition: transform ease-out 0.25s;
+    transform: translateX(-1 * 300px);
+}
+
+.sidebar.sidebar-open {
+    transform: translateX(0px);
+}
+
+.sidebar-header {
+    color: $yellow;
+    font-size: 2.2rem;
+    display: flex;
+    align-items: center;
+    flex: 0 4rem;
+}
+
+.sidebar-header:hover {
+    background: $hoverColor;
+}
+
+.sidebar-headerIcon {
+    height: 3rem;
+    padding: 0.3rem;
+    margin-right: 0.5rem;
+}
+
+.sidebar-items {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0;
+    margin-top: 0.5rem;
+    overflow-y: auto;    
+}
+
+.sidebar-categoryHeader, .sidebar-item {
+    display: flex;
+    align-items: center;
+    color: $light;
+}
+
+.sidebar-categoryHeader {
+    padding: 0.25rem;
+}
+
+.sidebar-item {
+    padding: 0.5rem;
+    padding-left: 2rem;
+}
+
+.sidebar-item:hover {
+    background: $hoverColor;
+}
+
+.sidebar-itemIcon.sidebar-itemIcon {
+    width: 2rem;
+    margin-right: 0.5rem;
+}
+
+.sidebar-category:nth-child(3n+1) > .sidebar-categoryHeader > svg.sidebar-itemIcon {
+    color: $red;
+}
+
+.sidebar-category:nth-child(3n+2) > .sidebar-categoryHeader > svg.sidebar-itemIcon {
+    color: $yellow;
+}
+
+.sidebar-category:nth-child(3n) > .sidebar-categoryHeader > svg.sidebar-itemIcon {
+    color: $purple;
+}
+
+
+.sidebar-item:nth-child(3n+1) > svg.sidebar-itemIcon {
+    color: $blue;
+}
+
+.sidebar-item:nth-child(3n+2) > svg.sidebar-itemIcon {
+    color: $green;
+}
+
+.sidebar-item:nth-child(3n) > svg.sidebar-itemIcon {
+    color: $orange;
+}
+
+.sidebar-category:nth-child(3n+1) > .sidebar-categoryHeader > div.sidebar-itemIcon {
+    background-color: $red;
+    height: 2rem;
+}
+
+.sidebar-category:nth-child(3n+2) > .sidebar-categoryHeader > div.sidebar-itemIcon {
+    background-color: $yellow;
+    height: 2rem;
+}
+
+.sidebar-category:nth-child(3n) > .sidebar-categoryHeader > div.sidebar-itemIcon {
+    background-color: $purple;
+    height: 2rem;
+}
+
+.sidebar-item:nth-child(3n+1) > div.sidebar-itemIcon {
+    background-color: $blue;
+    height: 2rem;
+}
+
+.sidebar-item:nth-child(3n+2) > div.sidebar-itemIcon {
+    background-color: $green;
+    height: 2rem;
+}
+
+.sidebar-item:nth-child(3n) > div.sidebar-itemIcon {
+    background-color: $orange;
+    height: 2rem;
+}

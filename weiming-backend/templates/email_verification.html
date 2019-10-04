@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <style type="text/css">
+            {% include "mail.css" %}
+        </style>
+        <main>
+            <h2>
+                <span>Email verification required</span>
+            </h2>
+            <p class="greeting">Hello {{ user.name }},</p>
+            <p>In order to combat spam accounts, your account on my web app will be deleted in 3 days if you do not activate your account.</p>
+            <p>You can activate your account by clicking: <a href="{{ url }}">here</a></p>
+            <p>or by copying and pasting into your address bar the following link:</p>
+            <p>{{ url }}</p>
+            <p class="end"></p>
+        </main>
+</body>
+</html>

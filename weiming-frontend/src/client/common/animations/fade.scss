@@ -1,0 +1,17 @@
+.fade-enter-active {
+    animation: fadeAnim linear 0.25s forwards;
+  }
+  
+  .fade-leave-active {
+    animation: fadeAnim linear 0.25s reverse;
+  }
+  
+  @keyframes fadeAnim {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  

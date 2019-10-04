@@ -1,0 +1,20 @@
+@import '../../common/colors.scss';
+
+.collapser {
+    width: 100%;
+}
+
+.collapser-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0rem 1rem;
+}
+
+.collapser-icon {
+    margin: 1rem;
+}
+
+.collapser-content {
+    padding: 0rem 1rem;
+}

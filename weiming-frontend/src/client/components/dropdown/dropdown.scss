@@ -1,0 +1,14 @@
+.dropdown {
+    position: relative;
+}
+
+.dropdown > .dropdown-menu {
+    position: absolute;
+    overflow: hidden;
+    z-index: 50000;
+    min-width: 100%;
+}
+
+.dropdown-menu.rightAlign {
+    right: 0;
+}

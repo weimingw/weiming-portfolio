@@ -1,0 +1,28 @@
+@import '../colors.scss';
+
+form.disabled {    
+    cursor: wait;
+    opacity: 0.5;
+}
+
+form.disabled * {
+    pointer-events: none;
+}
+
+.form-error {
+    color: $red;
+}
+
+form.singleColumn {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+form.singleColumn > * + * {
+    margin-top: 0.5rem;
+}
+
+form.singleColumn > .field + button {
+    margin-top: 1rem;
+}

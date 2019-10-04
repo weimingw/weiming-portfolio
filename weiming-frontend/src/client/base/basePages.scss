@@ -1,0 +1,53 @@
+@import '../common/colors.scss';
+
+.homePage {
+    
+}
+
+.homePage > h2 {
+    margin: 0.5rem 0rem;
+}
+
+.homePage > h3 {
+    margin: 0.5rem 0rem;
+}
+
+.homePage > h4 {
+    margin: 0.5rem 0rem;
+}
+
+.homePage > div {
+    margin: 0.25rem 0rem;
+}
+
+.pageNotFound {
+    line-height: 1.5em;
+}
+
+.pageNotFound > h2 {
+    margin: 1.25rem 0rem;
+    width: fit-content;
+}
+
+.pageNotFound > div {
+    margin: 0.5rem;
+}
+
+.loading {
+    animation: loadingFlash 3s ease-in-out 0s infinite;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5rem;
+}
+
+@keyframes loadingFlash {
+    0% { opacity: 1 }
+    50% { opacity: 0.5 }
+    100% { opacity: 1 }
+}
+
+.loading > .loading-icon {
+    height: 6rem;
+}

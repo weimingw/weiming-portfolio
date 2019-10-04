@@ -1,0 +1,19 @@
+@import '../../common/colors.scss';
+
+.slider {
+    width: 100%;
+    height: 100%;
+    padding: 0.25rem;
+    position: relative;
+    overflow: visible;
+    cursor: pointer;
+}
+
+.slider-area {
+    width: 100%;
+    height: 100%;
+}
+
+.slider-fill {
+    height: 100%;
+}

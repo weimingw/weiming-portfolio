@@ -1,0 +1,36 @@
+@import '../../common/colors.scss';
+
+.userMenu {
+    
+}
+
+.userMenu-icon.userMenu-icon {
+    padding: 1rem;
+    height: 4rem;
+    width: 4rem;
+    color: darken( $light, 30% );
+}
+
+.userMenu-icon.userMenu-icon:hover {
+    background-color: $darkMinus1;
+}
+
+.userMenu > .dropdown-menu {
+    width: 24rem;
+}
+
+.userMenu-menu {
+    background: darken( $dark, 7.5% );
+    font-size: 1.6rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.userMenu-menuItem {
+    padding: 0.5rem 1.25rem;
+    color: $light;
+}
+
+.userMenu-menuItem:hover {
+    background: $darkPlus1;
+}

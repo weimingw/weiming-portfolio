@@ -1,0 +1,13 @@
+{
+  "name": "Weiming Flask",
+  "description": "A Flask app created by Weiming Wu",
+  "keywords": [
+    "flask",
+    "python",
+    "mysql",
+    "peewee"
+  ],
+  "scripts": {
+
+  }
+}

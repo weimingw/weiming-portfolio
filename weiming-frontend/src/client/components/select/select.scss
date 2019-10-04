@@ -1,0 +1,39 @@
+@import '../../common/colors.scss';
+
+.select {
+    background: $dark;
+    border-bottom: 0.1rem solid $formItemBorderColor;
+}
+
+.select-options {
+    margin-top: 0.1rem; // so that the underline can show through
+    background: $darkPlus1;
+    min-width: 100%;
+}
+
+.select-clicker {
+    display: flex;
+    align-items: center;
+}
+
+.select-clicker > span {
+    flex: 1 0rem;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+
+.select-clicker > svg {
+    flex: 0 1rem;
+}
+
+.select-options > option.hover {
+    background: $darkMinus1;
+}
+
+.select-options > option {
+    cursor: pointer;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+    white-space: nowrap;
+}

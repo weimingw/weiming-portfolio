@@ -1,0 +1,30 @@
+@import '../../../common/functions.scss';
+@import '../../../common/colors.scss';
+
+.hexagrid {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.hexagrid-container {
+    will-change: transform;
+    padding-top: 0.25rem;
+    transform-origin: 50% 0%;
+}
+
+.hexagrid-hexagonWrapper {
+    position: absolute;
+}
+
+.hexagrid-hexagon {
+    transform-origin: 50% 50%;
+    background-color: $red;
+}
+
+.hexagrid-footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}

@@ -1,0 +1,10 @@
+@import '../colors.scss';
+
+svg.plusIcon,
+img.plusIcon {
+    color: $green;
+}
+
+.deleteIcon {
+    color: $red;
+}

@@ -1,0 +1,33 @@
+@import '../../common/colors.scss';
+
+.notificationDisplay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    width: 100%;
+    z-index: 10000;
+    padding: 0.25rem;
+}
+
+.notificationDisplay-message {    
+    background: $darkPlus2;
+    padding: 0.65rem 2rem;
+    margin-bottom: 0.5rem;
+    width: 90%;
+    text-align: center;
+    cursor: pointer;
+
+    border-radius: 0.5rem;
+    box-shadow: 0.25rem 0.25rem 1rem lighten( $dark, 5% );
+}
+
+.notificationDisplay-error {
+    color: $red;
+}
+
+.notificationDisplay-info {
+    color: $orange;
+}

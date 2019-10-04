@@ -1,0 +1,14 @@
+.layout-smallWidth {
+    width: 100%;
+    max-width: $pageWidth / 2;
+}
+
+.layout-mediumWidth {
+    width: 100%;
+    max-width: $pageWidth * 2 / 3;
+}
+
+.layout-fullWidth {
+    width: 100%;
+    max-width: $pageWidth;
+}

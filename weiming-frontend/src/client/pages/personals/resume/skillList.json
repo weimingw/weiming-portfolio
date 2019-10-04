@@ -1,0 +1,38 @@
+[{
+    "category": "Frontend",
+    "skills": [
+        "JavaScript (ES6+)",
+        "HTML, Handlebars",
+        "CSS, LESS, SASS",
+        "React, Redux",
+        "Vue"
+    ]
+}, {
+    "category": "Backend",
+    "skills": [
+        "Java, Spring",
+        "Node, Express"
+    ]
+}, {
+    "category": "Tools",
+    "skills": [
+        "Webpack",
+        "Jasmine, Jest",
+        "Mockito, JUnit",
+        "Git"
+    ]
+}, {
+    "category": "Other",
+    "skills": [
+        "Design pattern expert",
+        "Client-side performance expert"
+    ]
+}, {
+    "category": "Prior Exposure",
+    "skills": [
+        "C#, .NET, Windows WCF",
+        "Android",
+        "Python, Django",
+        "Ruby on Rails"
+    ]
+}]

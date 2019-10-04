@@ -1,0 +1,29 @@
+@import '../../common/colors.scss';
+
+.header {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+    flex: 1;
+}
+
+.header-link {
+    flex: 0 5rem;
+}
+
+.header-icon {
+    height: 4rem;
+    padding: 0.65rem;
+    margin: 0rem 0.5rem  0rem 0.5rem;
+    flex: 1;
+}
+
+.header-icon:hover {
+    background-color: $darkMinus1;
+}
+
+.header-items {
+    margin-left: 0.5rem;
+    color: $orange;
+    flex: 1;
+}

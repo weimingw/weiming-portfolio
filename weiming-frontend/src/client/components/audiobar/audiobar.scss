@@ -1,0 +1,75 @@
+@import '../../common/colors.scss';
+
+$bottomAudiobarRowPaddingX: 1rem;
+$bottomAudiobarRowPadding: 0.25rem $bottomAudiobarRowPaddingX;
+$bottomAudiobarRowHeight: 3.6rem;
+$audioBarIconWidth: 2rem;
+
+
+.audiobar {
+    width: 100%;
+    background: $darkPlus2;
+}
+
+.audiobar-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.audiobar-playbackMeter {
+    width: 100%;
+    height: 1rem;
+    transition: height ease-out 0.2s;
+}
+
+.audiobar-playbackMeter:hover {
+    height: 2rem;
+}
+
+
+
+.audiobar-buttons {
+    height: $bottomAudiobarRowHeight;
+    position: relative;
+    user-select: none;
+}
+
+.audiobar-buttons > * {
+    display: flex;
+    align-items: center;
+}
+
+.audiobar-fileName {
+    flex: 1 0rem;
+    padding: $bottomAudiobarRowPadding;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    user-select: none;
+}
+
+.audiobar-playButton,
+.audiobar-volumeButton {
+    padding: $bottomAudiobarRowPadding;
+}
+
+.audiobar-icon {
+    width: $audioBarIconWidth;
+}
+
+.audiobar-fileInput {
+    padding: $bottomAudiobarRowPadding;
+}
+
+.audiobar-volumeSlider {
+    width: $bottomAudiobarRowPaddingX * 2 + $audioBarIconWidth;
+    height: 24rem;
+    padding: 1rem 0rem;
+    position: absolute;
+    right: 0;
+    bottom: $bottomAudiobarRowHeight;
+    z-index: 10000;
+
+    background: lighten( $dark, 5% );
+}

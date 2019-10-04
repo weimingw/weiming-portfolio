@@ -1,0 +1,4 @@
+This is mostly not my code.
+The original code is here: https://github.com/charliekassel/vuejs-datepicker
+I had to fix a bug in this code, which seems to have an open pull request to fix here:
+https://github.com/charliekassel/vuejs-datepicker/pull/626

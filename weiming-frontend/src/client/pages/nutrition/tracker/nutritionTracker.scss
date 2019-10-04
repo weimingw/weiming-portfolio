@@ -1,0 +1,77 @@
+@import '../../../common/colors.scss';
+
+.nutritionTracker {
+
+}
+
+.nutritionTracker-contents {
+
+}
+
+.nutritionTracker-addDay {
+    padding: 0.3rem;
+}
+
+.nutritionTracker-daysList {
+    padding-left: 0rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.nutritionTracker-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    list-style: none;
+    height: 6.5rem;
+    border-bottom: 0.1rem solid $light;
+}
+
+.nutritionTracker-dayLink {
+    flex: 1 0;
+    color: $light;
+    padding: 0.25rem 0.25rem 0.25rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+.nutritionTracker-dayLink > * {
+    margin: 0.25rem 0rem;
+    overflow: hidden;
+}
+
+.nutritionTracker-dayLink-date {
+    color: $green;
+}
+
+.nutritionTracker-dayLink-description {
+    padding-left: 0.5rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.nutritionTracker-removeDay {
+    overflow: hidden;
+}
+
+.nutritionTracker-removeDay > .deleteIcon {
+    height: 100%;
+    width: 4rem;
+    padding: 1.25rem;
+}
+
+.nutritionTracker-deletionDialog > p {
+    margin: 1rem;
+}
+
+.nutritionTracker-deletionDialog-cancel,
+.nutritionTracker-deletionDialog-confirm {
+    width: 100%;
+    display: flex;
+    padding: 0.4rem;
+    justify-content: center;
+    align-items: center;
+}

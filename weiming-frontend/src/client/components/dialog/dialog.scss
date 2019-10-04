@@ -1,0 +1,47 @@
+@import '../../common/colors.scss';
+
+$dialogCloseButtonWidth: 4rem;
+
+.dialog-overlay {
+    width: 100%;
+    height: 100%;
+    z-index: 10000000000;
+    position: absolute;
+    pointer-events: none;
+}
+
+.dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: $darkPlus1;
+}
+
+.dialog-header-text {
+    flex: 0 1;
+    padding-left: 1rem;
+}
+
+.dialog-header-close {
+    flex: $dialogCloseButtonWidth 0;
+}
+
+.dialog-header-close.dialog-header-close > svg {
+    width: $dialogCloseButtonWidth;
+    height: $dialogCloseButtonWidth;
+    padding: ($dialogCloseButtonWidth - 2rem) / 2;
+}
+
+.dialog-open {
+    pointer-events: all;
+    background: transparentize( $darkPlus3, 0.5 );
+}
+
+.dialog {
+    width: 75%;
+    max-height: 50%;
+    background: $dark;
+    position: absolute;
+    box-shadow: 0.25rem 0.25rem 1rem lighten( $dark, 5% );
+    overflow-y: scroll;
+}

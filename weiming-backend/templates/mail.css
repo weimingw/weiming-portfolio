@@ -1,0 +1,40 @@
+main, body {
+    background: #383838;
+    color: #BBBBBB;
+    font-family: 'Trebuchet MS';
+}
+
+h2, p {
+    line-height: 2em;
+    padding-left: 16px;
+    padding-right: 16px;
+    margin: 0;
+}
+
+h2 {
+    font-size: 1.5em;
+    color: #DAB570;
+    padding-top: 2em;
+    padding-bottom: 0.5em;
+}
+
+p, a {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+div {
+    font-size: 1em;
+}
+
+a {
+    color: #61AFEF;
+}
+
+p.end {
+    padding-bottom: 3em;
+}
+
+p.greeting {
+    color: #98C379;
+}

@@ -1,0 +1,52 @@
+@import '../../common/base.scss';
+
+$headerHeight: 4rem;
+
+.main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: fit-content;
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.main-headerBar {
+    background-color: $darkPlus2;
+    flex: 0 $headerHeight;
+    display: flex;
+    align-items: center;
+}
+
+.main > .main-headerBar > .main-sidebarButton {
+    padding: 1rem;
+    width: $headerHeight;
+    height: $headerHeight;
+    font-size: 2rem;
+    color: $orange;
+    align-self: stretch;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    
+    flex: 1 0rem;
+    overflow-y: scroll;
+    margin-top: 0.5rem;
+    will-change: scroll;
+    width: 100vw;
+}
+
+// Minimum supported width
+// though we have a 1rem scrollbar, so keep that in mind!
+.main-content > .main-page {
+    min-width: 36rem;
+    padding: 3rem 2rem;
+}
+
+.main-content > .main-page.noPadding {
+    padding: 0rem;
+}

@@ -1,0 +1,10 @@
+.layout-oneColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: center;
+}
+
+.layout-oneColumn > * {
+    width: 100%;
+}

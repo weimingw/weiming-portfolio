@@ -1,0 +1,129 @@
+@import '../../../common/colors.scss';
+
+$sectionMargin: 2rem;
+
+.resume {
+    display: flex;
+    line-height: 2em;
+    min-height: fit-content;
+    height: 120rem; // used to make it look better when trying to print
+    width: 100%;
+    padding-top: 0rem;
+}
+
+.resume-leftColumn > * {
+    max-width: 38.4rem;
+    float: right;
+}
+
+.resume-rightColumn > * {
+    max-width: 57.6rem;
+    padding-right: 5.5rem;
+}
+
+.resume-leftColumn > *,
+.resume-rightColumn > * {
+    display: flex;
+    flex-direction: column;
+    min-height: fit-content;
+    padding: 6.5rem 3.5rem;
+    padding-left: 5.5rem;
+}
+
+.resume-leftColumn {
+    flex: 2 0rem;
+}
+
+.resume-leftColumn * {
+    color: white;
+}
+
+.resume-rightColumn {
+    background: white;
+    flex: 3 0rem;
+}
+
+.resume-rightColumn * {
+    color: $dark;
+}
+
+.resume-sectionHeader {
+    position: relative;
+}
+
+.resume-icon.resume-icon.resume-icon {
+    width: 1.5rem;
+    height: 100%;
+    position: absolute;
+    left: -2.1rem;
+}
+
+.resume-header {
+    min-height: 4rem;
+}
+
+.resume-header > * {
+    align-self: center;
+}
+
+.resume-section + .resume-section {
+    margin-top: $sectionMargin;
+}
+
+.resume-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.resume-row > * + * {
+    margin-left: 3rem;
+}
+
+.resume-row > *:last-child {
+    text-align: right;
+}
+
+.resume-workExperienceSection + .resume-workExperienceSection {
+    margin-top: 1.25rem;
+}
+
+.resume-list {
+    list-style-position: outside;
+    padding-left: 2rem;
+}
+
+.resume-link {
+    font-size: 1.2rem;
+}
+
+@media screen and (max-width: 64rem / 16 * 10) {
+    .resume {
+        flex-direction: column; // make it one column
+    }
+
+    .resume-leftColumn,
+    .resume-rightColumn {
+        max-width: 48rem;
+    }
+
+    .resume-leftColumn > * {
+        padding: 6.5rem 3.5rem 0rem 3.5rem;
+        float: left;
+    }
+
+    .resume-rightColumn {
+        background: unset;
+    }
+
+    .resume-rightColumn > * {
+        padding: $sectionMargin 3.5rem 6.5rem 3.5rem;
+    }
+
+    .resume-rightColumn * {
+        color: white;
+    }
+
+    .resume-header {
+        min-height: 0rem; // not needed to sync height between columns when it's one column
+    }
+}
