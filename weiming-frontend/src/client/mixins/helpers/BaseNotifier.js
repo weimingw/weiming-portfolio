@@ -11,7 +11,7 @@ export default class BaseNotifier {
         this.observers = this.observers.filter(ob => ob != observer);
     }
 
-    notify = (clickEvt) => {
-        console.warn("Notify not implemented by a notifier");
+    notify = (evt) => {
+        this.observers.forEach(ob => ob(evt));
     }
 }

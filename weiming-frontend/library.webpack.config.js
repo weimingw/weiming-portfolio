@@ -17,6 +17,10 @@ module.exports = {
             "@fortawesome/free-solid-svg-icons",
             'lodash',
             'src/lib/VueDatePicker/vuejs-datepicker.min',
+            'highcharts',
+            'highcharts-vue',
+            'highcharts-more',
+            '@vue/composition-api',
         ]
     },
     output: {

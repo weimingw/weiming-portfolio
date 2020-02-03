@@ -4,7 +4,7 @@ $nutritionVisualizerDeleteIconWidth: 3rem;
 $layoutItemPadding: 0.5rem;
 
 .nutritionVisualizer {
-    min-height: 96rem;
+
 }
 
 .nutritionVisualizer-graphs {
@@ -19,49 +19,46 @@ $layoutItemPadding: 0.5rem;
     margin-right: 1rem;
 }
 
-.nutritionVisualizer-foods {
+.nutritionVisualizer-intake {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: stretch;
 }
 
-.nutritionVisualizer-foods-list {
+.nutritionVisualizer-intake-list {
     padding-left: 0rem;
 }
 
-.nutritionVisualizer-foods-list > li {
-    list-style: none;
+.nutritionVisualizer-intake-listItem {
     display: flex;
-    align-items: baseline;
-    justify-content: space-between;
+    border-bottom: 1px solid $darkMinus3;
 }
 
-.nutritionVisualizer-foods-list > li > .label {
+.nutritionVisualizer-intake-listItem > div {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.nutritionVisualizer-intake-listItem > div > .label {
     max-width: 60%;
     overflow-x: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    padding-left: 0.25rem;
+    padding-left: 0.5rem;
 }
 
-.nutritionVisualizer-foods-list > li > .spacer {
-    flex-grow: 1;
-    border-bottom: 1px dashed transparentize($color: $light, $amount: 0.75);
-    margin: 0rem 1rem;
-}
 
-.nutritionVisualizer-foods-list > li > .tail {
-    display: flex;
-    align-items: center;
-    max-width: 30%;
-}
-
-.nutritionVisualizer-foods-list > li > .tail > .serving {
+.nutritionVisualizer-intake-listItem > div > .serving {
+    padding-right: 0.5rem;
     overflow-x: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    flex: 1 0;
+    max-width: 30%;
 }
 
 .nutritionVisualizer-foodItem-delete {
@@ -71,28 +68,28 @@ $layoutItemPadding: 0.5rem;
 .nutritionVisualizer-foodItem-delete.nutritionVisualizer-foodItem-delete > svg { // doubled identical selector to override default FontAwesome selector
     width: $nutritionVisualizerDeleteIconWidth;
     height: 3rem;
-    margin-left: 0.25rem;
     padding: 0.75rem;
 }
 
 .nutritionVisualizer-nutrition {
     width: 100%;
     margin-top: 0.5rem;
-    padding: 0.5rem;
 }
 
-.nutritionVisualizer-editFoodBtn {
-    margin-top: 0.25rem;
+.nutritionVisualizer-addBtn {
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
     text-align: left;
 }
 
 .nutritionVisualizer-date {
     align-self: unset;
     display: flex;
+    margin-bottom: 1rem;
 }
 
 @media screen and (min-width: $pageWidth / 16 * 12) { // styling when double column
-    .nutritionVisualizer-foods, 
+    .nutritionVisualizer-intake, 
     .nutritionVisualizer-nutrition {
     }
 
@@ -103,4 +100,72 @@ $layoutItemPadding: 0.5rem;
     .nutritionVisualizer > .nutritionVisualizer-date {
         align-self: flex-start;
     }
+}
+
+.nutritionVisualizer-nutrition-table {
+    
+}
+
+.nutritionVisualizer-nutrition-grouping:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+.nutritionVisualizer-nutrition-entry {
+    border: 0.1rem solid $darkMinus3;
+}
+
+.nutritionVisualizer-nutrition-entryContents {
+    padding: 0.25rem 1rem;
+    background: $darkMinus1;
+}
+
+.nutritionVisualizer-nutrition-nutrientLabel {
+
+}
+
+.nutritionVisualizer-nutrition-nutrientAmount {
+    font-size: 1.3rem;
+    display: flex;
+}
+
+.nutritionVisualizer-nutrition-progressBar {
+    flex: 1 0rem;
+    background: $blue;
+    transform-origin: 0% 50%;
+}
+
+.nutritionVisualizer-nutrition-percentage {
+    flex: 0 5rem;
+    margin-left: 1rem;
+    line-height: 1.5em;
+}
+
+.nutritionVisualizer-nutrition-entry > .dropdown-contents {
+    background: $darkPlus2;
+}
+
+.nutritionVisualizer-nutrition-breakdownEntry {
+    display: flex;
+    width: 100%;
+    font-size: 1.3rem;
+}
+
+.nutritionVisualizer-nutrition-breakdownEntry > .progressBar {
+    flex: 1 0;
+    margin: 0rem 1rem;
+}
+
+.nutritionVisualizer-nutrition-breakdownEntryLabel {
+    flex: 0 10rem;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.nutritionVisualizer-nutrition-breakdownEntryPercentage {
+    flex: 0 3.5rem;
+}
+
+.nutritionVisualizer-nutrition-breakdown {
+    padding: 1rem;
 }

@@ -1,0 +1,111 @@
+{
+    "name": "Weiming Wu",
+    "tagline": "Front End and Applications Software Engineer",
+    "linkedin": "https://www.linkedin.com/in/weiming-wu/",
+    "github": "https://github.com/weimingw",
+    "education": {
+        "school": "UC Berkeley",
+        "major": "Computer Science, Economics",
+        "time": "2013-2016"
+    },
+    "samples": [{
+        "name": "Personal Website",
+        "description": ""
+    }],
+    "skillList": [{
+        "category": "Frontend",
+        "skills": [{
+            "name": "JavaScript (ES6+)",
+            "level": 3
+        }, {
+            "name": "HTML, Handlebars",
+            "level": 2
+        }, {
+            "name": "CSS, LESS, SASS",
+            "level": 2
+        }, {
+            "name": "React, Redux",
+            "level": 2
+        }, {
+            "name": "Vue",
+            "level": 2
+        }]
+    }, {
+        "category": "Backend",
+        "skills": [{
+            "name": "Node, Express",
+            "level": 3
+        }, {
+            "name": "Java, Spring",
+            "level": 2
+        }, {
+            "name": "Python (Flask)",
+            "level": 1
+        }, {
+            "name": "Redis",
+            "level": 1
+        }]
+    }, {
+        "category": "Tools",
+        "skills": [{
+            "name": "Webpack",
+            "level": 2
+        }, {
+            "name": "Jasmine, Jest",
+            "level": 2
+        }, {
+            "name": "Mockito, JUnit",
+            "level": 2
+        }, {
+            "name": "Git",
+            "level": 2
+        }]
+    }, {
+        "category": "Other",
+        "skills": [{
+            "name": "Design pattern expert",
+            "level": null
+        }, {
+            "name": "Client-side performance expert",
+            "level": null
+        }, {
+            "name": "Independent",
+            "level": null
+        }, {
+            "name": "Fast learner",
+            "level": null
+        }]
+    }, {
+        "category": "Prior Exposure",
+        "skills": [{
+            "name": "Android",
+            "level": 0
+        }, {
+            "name": "Ruby on Rails",
+            "level": 0
+        }, {
+            "name": "PHP, Laravel",
+            "level": 0
+        }]
+    }],
+    "experience": [{
+        "title": "Software Engineer",
+        "employer": "Veeva Systems",
+        "timePeriod": "Jan 2017 - Present",
+        "stack": "Java (Spring), Handlebars, HTML, CSS, JQuery, React, Redux, MySQL",
+        "description": [
+            "Led implementation on web pages, UI components, and application logic for a core platform team.",
+            "Supported development of core backend features.",
+            "Acted as my team's main JavaScript expert.",
+            "Provided mentorship to newer hires."
+        ]
+    }, {
+        "title": "IT Developer Intern",
+        "employer": "AssetMark Financial",
+        "timePeriod": "June 2015 - Aug 2015",
+        "stack": "C# (.NET + WCF), MS SQL Server",
+        "description": [
+            "Designed and implemented an internal tool to facilitate providing reports for large clients."
+        ]
+    }]
+}

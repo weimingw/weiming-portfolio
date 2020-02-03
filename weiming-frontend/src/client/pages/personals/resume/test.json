@@ -1,0 +1,102 @@
+{
+    "name": "Tester",
+    "tagline": "Software Engineer, Frontend Focus",
+    "linkedin": "https://www.linkedin.com/in/tester-t/",
+    "github": "https://github.com/testert",
+    "education": {
+        "school": "Test",
+        "major": "Computer Science, Test",
+        "time": "2013-2016"
+    },
+    "samples": [{
+        "name": "Personal Website",
+        "description": ""
+    }],
+    "skillList": [{
+        "category": "Frontend",
+        "skills": [{
+            "name": "JavaScript (ES6+)",
+            "level": 3
+        }, {
+            "name": "HTML, Handlebars",
+            "level": 3
+        }, {
+            "name": "CSS, LESS, SASS",
+            "level": 2
+        }, {
+            "name": "React, Redux",
+            "level": 2
+        }, {
+            "name": "Vue",
+            "level": 2
+        }]
+    }, {
+        "category": "Backend",
+        "skills": [{
+            "name": "Java, Spring",
+            "level": 2
+        }, {
+            "name": "Node, Express",
+            "level": 3
+        }, {
+            "name": "Python (Flask)",
+            "level": 1
+        }, {
+            "name": "Redis",
+            "level": 1
+        }]
+    }, {
+        "category": "Tools",
+        "skills": [{
+            "name": "Webpack",
+            "level": 2
+        }, {
+            "name": "Jasmine, Jest",
+            "level": 2
+        }, {
+            "name": "Mockito, JUnit",
+            "level": 2
+        }, {
+            "name": "Git",
+            "level": 2
+        }]
+    }, {
+        "category": "Other",
+        "skills": [{
+            "name": "Design pattern expert",
+            "level": null
+        }, {
+            "name": "Client-side performance expert",
+            "level": null
+        }]
+    }, {
+        "category": "Prior Exposure",
+        "skills": [{
+            "name": "Android",
+            "level": 0
+        }, {
+            "name": "Ruby on Rails",
+            "level": 0
+        }, {
+            "name": "PHP, Laravel",
+            "level": 0
+        }]
+    }],
+    "experience": [{
+        "title": "Software Engineer",
+        "employer": "Testtest",
+        "timePeriod": "Jan 2017 - Present",
+        "stack": "Java (Spring MVC), Handlebars, JQuery + React, MySQL",
+        "description": [
+            "Test test test."
+        ]
+    }, {
+        "title": "Test",
+        "employer": "Tester",
+        "timePeriod": "June 2015 - Aug 2015",
+        "stack": "C# (.NET + WCF), MS SQL Server",
+        "description": [
+            "Testtest."
+        ]
+    }]
+}

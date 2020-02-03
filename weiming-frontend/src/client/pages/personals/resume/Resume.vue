@@ -1,110 +1,108 @@
 <script>
 import './resume.scss';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { getImageComponent } from '../../../assets';
+
 
 import endpoints from '../../../../common/endpoints';
-import PageMixin from '../../../mixins/PageMixin';
-import workExperience from './workExperience.json';
-import skillList from './skillList.json';
+import { usePageConfiguration } from '../../../mixins/PageMixin';
+import resume from './resume.json';
+import { createElement as h, reactive } from '@vue/composition-api';
+
+const LEVELS = [{
+    name: 'Mastered',
+    className: 'lmGreen',
+}, {
+    name: 'Proficient',
+    className: 'lmBlue',
+}, {
+    name: 'Comfortable',
+    className: 'lmPurple',
+}, {
+    name: 'Familiar',
+    className: 'lmRed',
+}]
 
 export default {
-    mixins: [PageMixin],
-    methods: {
-        getWorkExperienceElements(h) {
-            return workExperience.map(experience => {
-                return <div class="resume-workExperienceSection">
-                    <div><b>{experience.title}</b></div>
-                    <div class="resume-row">
-                        <div>{experience.employer}</div>
-                        <div>{experience.timePeriod}</div>
-                    </div>
-                    <div>Stack: {experience.stack}</div>
-                    <ul class="resume-list">
-                        {experience.description.map(line => <li>{line}</li>)}
-                    </ul>
-                </div>
-            });
-        },
-        getSkills(h) {
-            return skillList.map(list => {
-                return [
-                    <div><b>{list.category}</b></div>,
-                    <ul class="resume-list">
-                        { list.skills.map(skill => <li>{skill}</li>) }
-                    </ul>
-                ]
-            })
-        },
-        getInfoSection(h) {
-            return <div class="resume-section">
-                <div>Software Engineer, Frontend Focus</div>
-                <div>LinkedIn:</div>
-                <a class="resume-link" href="https://www.linkedin.com/in/weiming-wu/">
-                    https://www.linkedin.com/in/weiming-wu/
-                </a>
-                <div>Github:</div>
-                <a class="resume-link" href="https://github.com/weimingw">
-                    https://github.com/weimingw
-                </a>
-            </div>
-        },
-        getSkillsSection(h) {
-            return <div class="resume-section">
-                <h4 class="resume-sectionHeader">
-                    <FontAwesomeIcon class="resume-icon" icon="tools" />
-                    Skills
-                </h4>
-                { this.getSkills(h) }
-            </div>
-        },
-        getEducationSection(h) {
-            return <div class="resume-section">
-                <h4 class="resume-sectionHeader">
-                    <FontAwesomeIcon class="resume-icon" icon="user-graduate" />
-                    Education
-                </h4>
-                <div>UC Berkeley</div>
-                <div class="resume-row">
-                    <div>Computer Science, Economics</div>
-                    <div>2013-2016</div>
-                </div>
-            </div>
-        },
-        getWorkExperienceSection(h) {
-            return <div class="resume-section">
-                <h4 class="resume-sectionHeader">
-                    <FontAwesomeIcon class="resume-icon" icon="briefcase" />
-                    Work Experience
-                </h4>
-                { this.getWorkExperienceElements(h) }
-            </div>
-        },
-        getHeaderProps() {
-            return {
-                title: endpoints.personals.pages.resume.label
-            }
-        }
+    setup(props, ctxt) {
+        const state = reactive({
+            printMode: false,
+        });
+
+        function enterPrintMode() {
+            state.printMode = true;
+            document.querySelector('.main-headerBar').style.display = 'none';
+            document.querySelector('.main-content').style['overflow-y'] = 'unset';
+            document.querySelector('.main-content').style['margin-top'] = '0';
+            document.querySelector('.main-content').style['background'] = 'white';
+            document.querySelector('.sidebar').style.display = 'none';
+        };
+
+        return () => 
+            (<div class={`resume layout-fullWidth ${state.printMode ? 'printMode' : ''}`}>
+                { state.printMode ? null : <button onClick={enterPrintMode}>See Printable Resume</button> }
+                <section class='resume-me'>
+                    <h2 class='resume-name'>{resume.name}</h2>
+                    <h5 class='resume-tagline'>{resume.tagline}</h5>
+                    <a class='resume-link' href={resume.linkedin}>{resume.linkedin}</a>
+                    <a class='resume-link' href={resume.github}>{resume.github}</a>
+                </section>
+                <section class='resume-education'>
+                    <h4 class='resume-section-header'>Education</h4>
+                    <p class='resume-school'>
+                        <span>{ resume.education.school }</span>
+                        <span>({ resume.education.time })</span>
+                        <span>{ resume.education.major }</span>
+                    </p>
+                </section>
+                <section class='resume-skills'>
+                    <h4 class='resume-section-header'>Skills</h4>
+                    <span class='resume-legend'>
+                        {
+                            LEVELS.map(({ className, name }) => 
+                                <span>
+                                    { getImageComponent(h, 'square', { className }) } 
+                                    <span class='resume-legend-text ml2'>{ name }</span>
+                                </span>
+                            )
+                        }
+                    </span>
+                    {
+                        resume.skillList.map(category => 
+                            <section class='resume-skills-subsection'>
+                                <h5>{category.category}</h5>
+                                <div class='resume-skills-categorySection'>
+                                    { 
+                                        category.skills.map(skill => 
+                                            <p class={`resume-skills-skillPill level-${skill.level}`}>
+                                                { skill.name }
+                                            </p>
+                                        )
+                                    }
+                                </div>
+                            </section>  
+                        )
+                    }
+                </section>
+                <section class='resume-work'>
+                    <h4 class='resume-section-header'>Work Experience</h4>
+                    {
+                        resume.experience.map(({ title, employer, timePeriod, stack, description }) => (
+                            <div class='resume-work-entry'>
+                                <div class='flexSpaceBetweenJustifiedRow'>
+                                    <h5 class='resume-jobTitle'>{ title }</h5>
+                                    <span class='resume-employer'>{ employer } ({ timePeriod })</span>
+                                </div>
+                                <div class='resume-stack'>Stack: { stack }</div>
+                                <div class='resume-work-descriptionContainer'> {
+                                    description.map(i =>
+                                        <p class='resume-work-description'>{ i }</p>
+                                    )
+                                } </div>
+                            </div>
+                        ))
+                    } 
+                </section>
+            </div>)
     },
-    render(h) {
-        return (<div class="resume noPadding">
-            <div class="resume-section resume-leftColumn">
-                <div>
-                    <div class="resume-header resume-sectionHeader">
-                        <FontAwesomeIcon class="resume-icon" icon="user-circle" />
-                        <h2>Weiming Wu</h2>
-                    </div>
-                    { this.getInfoSection(h) }
-                    { this.getSkillsSection(h) }
-                </div>
-            </div>
-            <div class="resume-rightColumn">
-                <div>
-                    <div class="resume-header"></div>
-                    { this.getEducationSection(h) }
-                    { this.getWorkExperienceSection(h) }
-                </div>
-            </div>
-        </div>)
-    }
 }
 </script>

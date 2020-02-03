@@ -20,7 +20,7 @@ export default {
             required: true,
         },
         selected: {
-            type: String,
+            type: [ String, Number ],
         },
         className: {
             type: String,
@@ -30,6 +30,7 @@ export default {
     data() {
         return {
             hovering: undefined, // index of the element being hovered over
+            expanded: false,
         }
     },
     methods: {
@@ -39,9 +40,10 @@ export default {
                     tabindex="0"
                     onKeydown={this.onKeydown}
                     title={ selected ? selected.label : '' }
-                    value={ selected ? selected.key : undefined }>
-                    <span>{ selected ? selected.label : '' }</span>
-                    { getImageComponent(h, 'caret-down', {}) }
+                    value={ selected ? selected.key : undefined }
+                    onClick={() => this.expanded = true}>
+                <span>{ selected ? selected.label : '' }</span>
+                { getImageComponent(h, 'caret-down', {}) }
                 </div>
         },
         renderSelection(h) {
@@ -63,7 +65,7 @@ export default {
         onKeydown(evt) {
             evt.preventDefault();
             const numSelections = this.formattedSelection.length;
-            this.$refs.dropdown.openMenu()
+            this.expanded = true;
             switch (evt.key) {
                 case 'ArrowDown':
                     this.hovering = this.hovering === undefined ?
@@ -88,21 +90,21 @@ export default {
                 case 'Enter':
                     if (this.hovering) {
                         this.select(this.hovering);
-                        this.closeMenu();
+                        this.collapse();
                     }
                     return;
                 case 'Escape': 
-                    this.closeMenu();
+                    this.collapse();
                     return;
             }
         },
-        closeMenu() {
-            this.$refs.dropdown.closeMenu();
+        collapse() {
+            this.expanded = false;
             this.hovering = undefined;
         },
         onClick(evt) {
             this.select();
-            this.$refs.dropdown.closeMenu();
+            this.expanded = false;
         },
         mouseover(evt, index) {
             this.hovering = index;
@@ -130,7 +132,8 @@ export default {
                 ref='dropdown'
                 duration={100}
                 rightAlign={true}
-                className={`select ${this.className}`}
+                className={`select clickable ${this.className}`}
+                expanded={this.expanded}
                 renderButton={this.renderSelected} 
                 renderContents={this.renderSelection} />
     },

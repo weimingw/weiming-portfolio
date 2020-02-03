@@ -1,4 +1,4 @@
-@import '../../../common/colors.scss';
+@import '../../../common/base.scss';
 
 .nutritionTracker {
 
@@ -74,4 +74,10 @@
     padding: 0.4rem;
     justify-content: center;
     align-items: center;
+}
+
+.nutritionTracker-graphs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }

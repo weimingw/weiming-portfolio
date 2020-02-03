@@ -3,17 +3,22 @@
 .select {
     background: $dark;
     border-bottom: 0.1rem solid $formItemBorderColor;
+    height: 2em;
 }
 
 .select-options {
     margin-top: 0.1rem; // so that the underline can show through
     background: $darkPlus1;
     min-width: 100%;
+
+    max-height: 15rem;
+    overflow-y: auto;
 }
 
 .select-clicker {
     display: flex;
     align-items: center;
+    padding: 0rem 0.75rem 0rem 0.5rem;
 }
 
 .select-clicker > span {
@@ -36,4 +41,6 @@
     text-overflow: ellipsis;
     overflow-x: hidden;
     white-space: nowrap;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 }

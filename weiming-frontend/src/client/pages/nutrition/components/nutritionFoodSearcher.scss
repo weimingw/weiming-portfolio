@@ -1,0 +1,111 @@
+@import '../../../common/colors.scss';
+
+$nutritionSearcherLeftPadding: 0.5rem;
+
+.nutrition-foodSearcher {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    position: relative;
+    background: $darkPlus1;
+}
+
+.nutrition-foodSearcher-searchbar {
+    display: flex;
+}
+
+.nutrition-foodSearcher-searchbar > input {
+    flex: 1 0;
+    padding-left: $nutritionSearcherLeftPadding;
+}
+
+.nutrition-foodSearcher-searchbar > button {
+    flex: 0 9rem;
+}
+
+.nutrition-foodSearcher-searchbar > .nutrition-foodSearcher-cancel {
+    width: 3rem;
+    height: 3rem;
+    padding: 0.75rem;
+}
+
+.nutrition-foodSearcher-results {
+    position: absolute;
+    z-index: 1000;
+    width: 100%;
+    max-height: 28rem;
+    overflow-y: scroll;
+    background: $darkPlus1;
+    box-shadow: 0.25rem 0.25rem 1rem $darkMinus4;
+    transform-origin: 50% 0%;
+}
+
+.nutrition-foodSearcher-item {
+    padding: 0.25rem $nutritionSearcherLeftPadding;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+.nutrition-foodSearcher-item:hover {
+    background: transparentize( $light, 0.95 );
+    color: $yellow;
+}
+
+.nutrition-foodSearcher-item > svg {
+    margin-right: 0.75rem;
+}
+
+.nutrition-foodSearcher-pill {
+    flex: 1 0;
+    display: flex;
+    justify-content: space-between;
+    padding-left: $nutritionSearcherLeftPadding;
+    overflow-x: hidden;
+}
+
+.nutrition-foodSearcher-pill > span:first-child {
+    flex: 1 0;
+    color: $orange;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow-x: hidden;
+}
+
+.nutrition-foodSearcher-pill > .nutrition-foodSearcher-clearSearch > svg {
+    color: $red;
+    width: 3rem;
+    height: 3rem;
+    padding: 0.75rem;
+}
+
+.nutrition-foodSearcher-optionsContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.nutrition-foodSearcher-optionsContainer > div:not(.nutrition-foodSearcher-optionsEntry) {
+    padding-left: $nutritionSearcherLeftPadding;
+}
+
+.nutrition-foodSearcher-optionsEntry {
+    display: flex;
+}
+
+.nutrition-foodSearcher-amount {
+    min-width: 0rem;
+    padding: 0.25rem $nutritionSearcherLeftPadding;
+    flex: 1 0;
+    text-align: right;
+}
+
+.nutrition-foodSearcher-unitSelector {
+    color: $green;
+    flex: 0 10rem;
+    max-width: 10rem;
+}
+
+.nutrition-foodSearcher-unitSelector > .dropdown-contents > .select-options {
+    max-width: 16rem;
+}

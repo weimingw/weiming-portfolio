@@ -1,22 +1,36 @@
 class MainPageAccessor {
     constructor() {
-        this.mainPageInstance = null;
+        this.mainPageState = null;
+        this.mainPageFunctions = null;
     }
 
-    setInstance(instance) {
-        this.mainPageInstance = instance;
+    setInstance = (state, functions) => {
+        this.mainPageState = state;
+        this.mainPageFunctions = functions;
+    };
+
+    setHeader = (props) => {
+        this.mainPageState.headerProps = props;
     }
 
-    setHeader(props) {
-        this.mainPageInstance.headerProps = props;
+    setSidebar = (props) => {
+        this.mainPageState.sidebarProps = props;
     }
 
-    setSidebar(props) {
-        this.mainPageInstance.sidebarProps = props;
+    setFooter = (props) => {
+        this.mainPageState.footerProps = props;
     }
 
-    setFooter(props) {
-        this.mainPageInstance.footerProps = props;
+    setLoading = (isLoading) => {
+        if (this.mainPageState) {
+            this.mainPageState.loading = isLoading;
+        }
+    }
+
+    closeSidebar = () => {
+        if (this.mainPageFunctions) {
+            this.mainPageFunctions.closeSidebar();
+        }
     }
 }
 

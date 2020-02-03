@@ -1,0 +1,26 @@
+
+
+.flexBaselineAlignedRow {
+    display: flex;
+    align-items: baseline;
+}
+
+.flexCenterAlignedRow {
+    display: flex;
+    align-items: center;
+}
+
+.flexSpaceBetweenRow {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flexCenterJustifiedRow {
+    display: flex;
+    justify-content: center;
+}
+
+.flexSpaceBetweenJustifiedRow {
+    display: flex;
+    justify-content: space-between;
+}

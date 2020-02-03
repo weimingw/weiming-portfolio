@@ -37,9 +37,17 @@ function setupRouter(router) {
      */
     router.get(nutritionAppEndpoints.getNutritionFacts.partialUrl, (req, res) => {
         let {
-            fdcId,
+            fdcIds,
         } = req.query;
+        // is a GET, so single item list is interpreted as single value
+        // make a list, but only have distinct values
+        fdcIds = [
+            ... new Set(Array.isArray(fdcIds) ? fdcIds : [ fdcIds ]).values()
+        ]; 
 
-        return handlePromiseWithResponse(nutritionService.getNutritionFacts(fdcId), req, res);
+        const payloadsPromise = Promise.all(
+            fdcIds.map(fdcId => nutritionService.getNutritionFacts(fdcId))
+        ).then(payloads => ({ data: payloads }));
+        return handlePromiseWithResponse(payloadsPromise, req, res);
     });
 }

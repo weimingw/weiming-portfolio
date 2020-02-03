@@ -7,11 +7,25 @@ $yellow: #DAB570;
 $blue: #61AFEF;
 $purple: #9A7FD5;
 
+// light mode colors
+$lmRed: #D32F2F;
+$lmBlue: #1976D2;
+$lmGreen: #207433;
+$lmPurple: #8642C1;
+$lmDark: #212121;
+
+
 $darkMinus1: lighten( $dark, 2.5% );
+$darkMinus2: lighten( $dark, 5% );
+$darkMinus3: lighten( $dark, 7.5% );
+$darkMinus4: lighten( $dark, 10% );
+$darkMinus8: lighten( $dark, 20% );
 
 $darkPlus1: darken( $dark, 2.5% );
 $darkPlus2: darken( $dark, 5% );
 $darkPlus3: darken( $dark, 7.5% );
+
+$lightPlus2: darken( $light, 5% );
 
 $formItemBorderColor: darken( $light, 40% );
 
@@ -37,4 +51,40 @@ $formItemBorderColor: darken( $light, 40% );
 
 .orange {
     color: $orange;
+}
+
+.greenBackground {
+    background: $green;
+}
+
+.lmGreenBackground {
+    background: $lmGreen;
+}
+
+.lmRedBackground {
+    background: $lmRed;
+}
+
+.lmBlueBackground {
+    background: $lmBlue;
+}
+
+.lmPurpleBackground {
+    background: $lmPurple;
+}
+
+.lmGreen {
+    color: $lmGreen;
+}
+
+.lmRed {
+    color: $lmRed;
+}
+
+.lmBlue {
+    color: $lmBlue;
+}
+
+.lmPurple {
+    color: $lmPurple;
 }

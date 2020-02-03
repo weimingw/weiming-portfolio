@@ -1,45 +1,141 @@
 <script>
+import { useStore, actionKeys } from '../../../vuex';
+import { useRouter } from '../../../router';
+
 import Loading from '../../../base/Loading.vue'; 
-import store, { actionKeys } from '../../../vuex';
-import SessionRequiredMixin from '../../../mixins/SessionRequiredMixin';
+import { useSessionRequired } from '../../../mixins/SessionRequiredMixin';
 import { dialogHandler } from '../../../components/dialog/Dialog.vue';
-import VerticalExpandMixin from '../../../common/animations/VerticalExpandMixin';
+import { useVerticalExpansion } from '../../../common/animations/VerticalExpansion';
 
 import './nutritionTracker.scss';
 import nutritionEndpoints from '../../../../common/endpoints/nutritionEndpoints'; 
 import { getImageComponent } from '../../../assets';
 import { makeAppRequestToEndpoint } from '../../../helpers/requestUtils';
+import { getNutrientPercentageFromAmount, getNutrientAmountFromCustomEntryItem, nutrientIds } from '../nutritionUiCommon';
+import { MACRONUTRIENTS, HELPFUL, VITAMINS, OTHER, BLANK_NUTRIENT_MAP } from './nutritionTrackerHelpers';
+import Tooltip from '../../../components/tooltip/Tooltip.vue';
+import PolarChart from '../../../components/charts/PolarChart.vue';
+import * as colors from '../../../common/colors';
+import { createElement as h, reactive, watch } from '@vue/composition-api';
+
+const colorOrdering = [ colors.BLUE, colors.GREEN, colors.PURPLE, colors.YELLOW ];
+const fillColorOrdering = colorOrdering.map(c => colors.hexToRgb(c, 0.25));
+
+function getNutrientsFromCustomEntries(props, state) {
+    const nutrients = { ...BLANK_NUTRIENT_MAP };
+    state.daysList.forEach(day => {
+        day.customEntries.forEach(entry => {
+            entry.nutrients.forEach(nutrient => {
+                nutrients[nutrient.key] += getNutrientAmountFromCustomEntryItem(nutrient);
+            });
+        });
+    });
+    return nutrients;
+};
+
+function getIntakesFromFood(props, state) {
+    const intakes = new Map();
+    state.daysList.forEach(day => {
+        day.entries.forEach(entry => {
+            const intakeForFood = intakes.get(entry.fdcId) || [];
+            intakeForFood.push(entry);
+            intakes.set(entry.fdcId, intakeForFood);
+        });
+    });
+    return intakes;
+};
+
+async function getNutrientsFromFoods(props, state) {
+    const intakes = getIntakesFromFood(props, state);
+    const nutrientsFromFoods = { ...BLANK_NUTRIENT_MAP };
+
+    if (intakes.size) {
+        const response = await makeAppRequestToEndpoint(
+        nutritionEndpoints.app.getNutritionFacts, 
+            { },
+            { fdcIds: [ ...intakes.keys() ] }
+        );
+        response.payload.data.forEach(food => { // for each food eaten
+            const foodIntake = intakes.get(food.fdcId);
+            foodIntake.forEach(({ amount, unit }) => {  // go through each time the user ate the food
+                Object.entries(food.nutrients).forEach(([ nutrientId, nutrientData ]) => { 
+                    // go through each nutrient that food had
+                    // and add its nutritional value to the total
+                    nutrientsFromFoods[nutrientId] += nutrientData.amount * amount * unit.gramWeight;
+                }); 
+            });
+        });
+    }
+    return nutrientsFromFoods;
+};
+
+async function recalculateNutrition(props, state) {
+    const nutrientsFromCustomEntries = getNutrientsFromCustomEntries(props, state);
+    const nutrientsFromFoods = await getNutrientsFromFoods(props, state);
+
+    const nutrients = {};
+    Object.keys(nutrientsFromFoods).forEach(nutrientId => {
+        const totalAmount = (nutrientsFromCustomEntries[nutrientId] + nutrientsFromFoods[nutrientId]) / state.daysList.length;
+        nutrients[nutrientId] = Math.min(getNutrientPercentageFromAmount(nutrientId, totalAmount), 100);
+    })
+
+    state.nutrients = nutrients;
+};
+
+/* Gets days from server */
+function getDays(props, state) {
+    makeAppRequestToEndpoint(nutritionEndpoints.api.getDays, { }, { detailed: true })
+            .then(response => state.daysList = response.payload)
+            .catch(err => null);
+};
 
 export default {
-    mixins: [ SessionRequiredMixin, VerticalExpandMixin ],
-    data() {
-        return {
+    setup(props, context) {
+        const state = reactive({
             daysList: undefined,
             duration: 200,
             openDialog: false,
             isDeleting: false,
-        };
-    },
-    methods: {
-        renderContents(h) {
-            return this.daysList === undefined ?
+            nutrients: undefined,
+        });
+
+        const store = useStore();
+        const router = useRouter();
+        const { hasSession } = useSessionRequired();
+        const { enterAnimation, leaveAnimation } = useVerticalExpansion();
+
+        if (hasSession) {
+            getDays(props, state);
+        }
+
+        watch(() => {
+            state.daysList ?
+                recalculateNutrition(props, state) :
+                null
+        });
+
+        function renderContents() {
+            return state.daysList === undefined ?
                     <Loading /> :
-                    this.renderDaysList(h);
-        },
-        renderDaysList(h) {
+                    renderDaysList();
+        };
+        function renderDaysList() {
             return <transition-group tag='ul' class='nutritionTracker-daysList'
-                    onEnter={this.enterAnimation}
-                    onLeave={this.leaveAnimation}>
+                    onEnter={enterAnimation}
+                    onLeave={leaveAnimation}>
                 <button class='nutritionTracker-addDay mt10 mb10' key='addDayBtn'
-                        onClick={() => this.$router.push({ path: nutritionEndpoints.pages.visualizer.fullUrl })}>
+                        onClick={() => router.push({ path: nutritionEndpoints.pages.visualizer.fullUrl })}>
                     { getImageComponent(h, 'plus', { className: 'plusIcon mr5' }) }
                     Add a new day
                 </button>
-                <h4 key='header'>Most Recent Entries</h4>
-                { this.daysList.map(day => this.renderDaysListItem(h, day)) }
+                <div class='flexBaselineAlignedRow' key='header'>
+                    <h3 class='mr5' key='header'>Most Recent Entries</h3>
+                    <Tooltip content='Add days to start tracking!' />
+                </div>
+                { state.daysList.map(day => renderDaysListItem(day)) }
             </transition-group>
-        },
-        renderDaysListItem(h, day) {
+        };
+        function renderDaysListItem(day) {
             return <li class='nutritionTracker-item' key={`${day.date}`}>
                 <router-link class='nutritionTracker-dayLink clickable' to={{ 
                         path: nutritionEndpoints.pages.visualizer.fullUrl, 
@@ -50,14 +146,14 @@ export default {
                         { day.entries.map(day => day.label).join(' | ') || 'Nothing' }
                     </p>
                 </router-link>
-                <div class='nutritionTracker-removeDay' onClick={() => this.showDeleteConfirmation(day)}>
+                <div class='nutritionTracker-removeDay' onClick={() => showDeleteConfirmation(day)}>
                     { getImageComponent(h, 'times', { className: 'deleteIcon clickable' }) }
                 </div>
             </li>
-        },
-        renderDeletionDialog(h, closeDialog, day) {
-            return <form class={`${this.isDeleting ? 'disabled' : ''} nutritionTracker-deletionDialog`}
-                    onSubmit={(evt) => this.deleteDay(evt, day, closeDialog)}>
+        };
+        function renderDeletionDialog(closeDialog, day) {
+            return <form class={`${state.isDeleting ? 'disabled' : ''} nutritionTracker-deletionDialog`}
+                    onSubmit={(evt) => deleteDay(evt, day, closeDialog)}>
                 <p>Are you sure you want to delete the entry for this day?</p>
                 <p class='green'>{ day.date }</p>
                 <div>
@@ -72,49 +168,90 @@ export default {
                       
                 </div>
             </form>
-        },
+        };
+        function renderGraphs() {
+            if (!state.nutrients) {
+                return;
+            }
 
-        /* Gets days from server */
-        getDays() {
-            makeAppRequestToEndpoint(nutritionEndpoints.api.getDays, { }, { detailed: true })
-                    .then(response => this.daysList = response.payload)
-                    .catch(err => null);
-        },
-        showDeleteConfirmation(day) {
+            return <div key='graphs' class='nutritionTracker-graphs'>
+                 { renderGraph(MACRONUTRIENTS, 1) }
+                 { renderGraph(HELPFUL, 2) }
+                 { renderGraph(OTHER, 3) }
+                 { renderGraph(VITAMINS, 4) }
+            </div>
+        };
+        function renderGraph(nutrientList, colorNumber) {
+            const options = getChartOptions('', nutrientList, colorNumber);
+            return <div class={`nutritionTracker-graphContainer nutritionTracker-graphContainer-${colorNumber}`}>
+                <PolarChart options={options} />
+            </div>
+        };
+        
+        function showDeleteConfirmation(day) {
             // delete with a dialog...
             dialogHandler.displayDialog({
-                renderBodyElements: (h, closeDialog) => this.renderDeletionDialog(h, closeDialog, day),
+                renderBodyElements: (h, closeDialog) => renderDeletionDialog(closeDialog, day),
                 useDefaultFooter: false,
             });
-        },
-        deleteDay(evt, deleteDay, closeDialog) {
-            this.isDeleting = true;
+        };
+        function deleteDay(evt, deleteDay, closeDialog) {
+            state.isDeleting = true;
             makeAppRequestToEndpoint(nutritionEndpoints.api.deleteDay, { }, { id: deleteDay.id })
                     .then(() => {
-                        this.daysList = this.daysList.filter(day => day.id != deleteDay.id);
+                        state.daysList = state.daysList.filter(day => day.id != deleteDay.id);
                         closeDialog();
-                        this.isDeleting = false;
+                        state.isDeleting = false;
                     });
             evt.preventDefault();
-        },
+        };
+        function getChartOptions(label, nutrientList, colorNumber) {
+            const options = {
+                chart: {
+                    width: 300,
+                    height: 240,
+                    margin: [0, 70, 0, 70],
+                },
+                title: {
+                    text: null,
+                },
+                xAxis: { 
+                    categories: nutrientList.map(macronutrient => macronutrient.label),
+                },
+                yAxis: {
+                    min: 0,
+                    max: 100,
+                    tickInterval: 25,
+                },
+                legend: {
+                    enabled: false,
+                },
+                series: [{
+                    type: 'area',
+                    data: nutrientList.map(n => state.nutrients[n.nutrientId]),
+                    color: colorOrdering[colorNumber-1],
+                    fillColor: fillColorOrdering[colorNumber-1],
+                }],
+            }
+            return options;
+        };
+
+        return () => 
+            (<div class='nutritionTracker layout-mediumWidth layout-oneColumn'>
+                <div class='flexBaselineAlignedRow'>
+                    <h3 class='mr5'>Nutritional Intake Overview</h3>
+                    <Tooltip content='The graphs below display the average intake of each nutrient tracked over the days you have listed.' />
+                </div>
+                <transition-group name='fade'>
+                    
+                    { renderGraphs() }
+                </transition-group>
+                <div class='nutritionTracker-contents'>
+                    <transition mode='out-in' name='fade'>
+                        { renderContents() }
+                    </transition>
+                </div>
+            </div>)
     },
-    mounted() {
-        if (this.hasSession) {
-            this.getDays();
-        }
-    },
-    render(h) {
-        return (<div class='nutritionTracker layout-mediumWidth layout-oneColumn'>
-            <h4>Nutritional Intake Overview</h4>
-            <div>
-                Graph for everything goes here
-            </div>
-            <div class='nutritionTracker-contents'>
-                <transition mode='out-in' name='fade'>
-                    { this.renderContents(h) }
-                </transition>
-            </div>
-        </div>)
-    }
 }
 </script>

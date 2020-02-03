@@ -1,0 +1,49 @@
+@import '../../common/colors.scss';
+
+.writeup {
+
+}
+
+.writeup-section {
+    position: relative;
+}
+
+.writeup-section.withIcon > .collapser-toggle {
+    padding-left: 4rem;
+}
+
+.writeup-section.withIcon > .collapser-content {
+    padding-left: 4rem;
+}
+
+
+.writeup-sectionIcon.writeup-sectionIcon {
+    width: 2rem;
+    height: 1.75rem;
+    left: 1.25rem;
+    position: absolute;
+}
+
+.writeup-section.withIcon:nth-child(3n) .writeup-sectionIcon {
+    color: $blue;
+}
+
+.writeup-section.withIcon:nth-child(3n+1) .writeup-sectionIcon {
+    color: $green;
+}
+
+.writeup-section.withIcon:nth-child(3n+2) .writeup-sectionIcon {
+    color: $purple;
+}
+
+.writeup-section.withIcon:nth-child(3n) .writeup-sectionIcon.svg {
+    background-color: $blue;
+}
+
+.writeup-section.withIcon:nth-child(3n+1) .writeup-sectionIcon.svg {
+    background-color: $green;
+}
+
+.writeup-section.withIcon:nth-child(3n+2) .writeup-sectionIcon.svg {
+    background-color: $purple;
+}

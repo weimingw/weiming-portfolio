@@ -1,14 +1,18 @@
+@import '../../common/colors.scss';
+
 .dropdown {
     position: relative;
 }
 
-.dropdown > .dropdown-menu {
+.dropdown > .dropdown-contents {
     position: absolute;
     overflow: hidden;
     z-index: 50000;
     min-width: 100%;
+    box-shadow: 0rem 0.5rem 1rem $darkMinus3;
+    background: $darkPlus1;
 }
 
-.dropdown-menu.rightAlign {
+.dropdown-contents.rightAlign {
     right: 0;
 }

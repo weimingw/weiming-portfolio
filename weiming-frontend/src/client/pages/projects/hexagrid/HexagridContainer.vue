@@ -9,7 +9,8 @@ import {
     HexagonAnimationCoordinator,
     animatedHexagons,
 }  from './hexagridUtils';
-import ResizeListenerMixin from '../../../mixins/ResizeListenerMixin';
+import { useResizeListener } from '../../../mixins/EventListeners';
+import { createElement as h, onMounted, reactive } from '@vue/composition-api';
 
 const numRows = 11;
 const numPerRow = 16;
@@ -19,65 +20,82 @@ const width = getHexagonSx(1, numPerRow) + hexagonWidth * 10;
 
 
 export default {
-    mixins: [ResizeListenerMixin],
     props: {
         subscribeToPlayback: {
             type: Function,
         }
     },
-    data() {
-        return {
+    setup(props, context) {
+        const state = reactive({
             style: {
                 height,
                 width,
                 transform: '',
             },
             hexagonAnimationCoordinator: new HexagonAnimationCoordinator(),
-        }
-    },
-    methods: {
-        /* Render helper methods */
-        getRows(h) {
+        });
+
+        function resize() {
+            const parentHeight = context.refs.el.parentElement.getBoundingClientRect().height - 56; // the parent's height, minus footer for audiobar
+            const clientWidth = document.documentElement.getBoundingClientRect().width; // use window width
+            const xScale = clientWidth / width;
+            const yScale = parentHeight / height;
+            const scale = Math.min(xScale, yScale) * 0.95;
+            state.style.transform = `scale(${scale})`;
+        };
+
+        useResizeListener({
+            onResize: resize,
+        });
+
+        onMounted(() => {
+            resize();
+            props.subscribeToPlayback(onPlayback);
+        });
+
+        function getRows() {
             const rows = [];
             for (let i = 0; i < numRows; i++) {
-                rows.push(this.getRow(h, i));
+                rows.push(getRow(i));
             }
             return rows;
-        },
+        };
 
-        getRow(h, rowIndex) {
+        function getRow(rowIndex) {
             const row = [];
             const numForRow = rowIndex % 2 === 0 ? numPerRow + 1 : numPerRow;
             for (let i = 0; i < numForRow; i++) {
                 const key = `${rowIndex},${i}`;
                 row.push(<Hexagon key={key}
                     x={i} y={rowIndex}
-                    addToRegistry={this.addHexagon.bind(this)}
-                    onHexagonClick={this.onHexagonClick} />)
+                    addToRegistry={addHexagon}
+                    onHexagonClick={onHexagonClick} />)
             }
             return row;
-        },
-        /* Render helpers end */
+        };
 
-        addHexagon(key, hexagon) {
+        function addHexagon(key, hexagon) {
             // purposefully not doing Vue.set because re-rendering for this is pointless
-            this.hexagonAnimationCoordinator.addHexagon(key, hexagon);
-        },
-        onHexagonClick(cx, cy, cz) {
-            this.hexagonAnimationCoordinator.startWave(cx, cy, cz);
-        },
-        onPlayback(audioPlayer) {
-            const intensities = this.getIntensityArray(audioPlayer.analyser);
+            state.hexagonAnimationCoordinator.addHexagon(key, hexagon);
+        };
+
+        function onHexagonClick(cx, cy, cz) {
+            state.hexagonAnimationCoordinator.startWave(cx, cy, cz);
+        };
+        
+        function onPlayback(audioPlayer) {
+            const intensities = getIntensityArray(audioPlayer.analyser);
             
             for (let i = 0; i < intensities.length; i++) {
                 const { cx, cy, cz } = animatedHexagons[i];
                 let intensity = Math.floor(intensities[i] / 52);
                 if (intensity > 0) {
-                    this.hexagonAnimationCoordinator.startWave(cx, cy, cz, intensity);
+                    state.hexagonAnimationCoordinator.startWave(cx, cy, cz, intensity);
                 }
             }
-        },
-        getIntensityArray(analyser) {
+        };
+
+        function getIntensityArray(analyser) {
             const intensities = new Uint8Array(analyser.frequencyBinCount);
 
             analyser.getByteFrequencyData(intensities);
@@ -86,27 +104,14 @@ export default {
                 smushed.push( (intensities[start] + intensities[start+1]) / 2 );
             }
             return smushed;
-        },
-        receiveResize(evt) {
-            this.resize();
-        },
-        resize() {
-            const parentHeight = this.$el.parentElement.getBoundingClientRect().height - 56; // the parent's height, minus footer for audiobar
-            const clientWidth = document.documentElement.getBoundingClientRect().width; // use window width
-            const xScale = clientWidth / width;
-            const yScale = parentHeight / height;
-            const scale = Math.min(xScale, yScale) * 0.95;
-            this.$set(this.style, 'transform', `scale(${scale})`);
-        },
-    },
-    mounted() {
-        this.resize();
-        this.subscribeToPlayback(this);
-    },
-    render(h) {
-        return (<div class="hexagrid-container" style={this.style}>
-            { this.getRows(h) }
-        </div>)
+        };
+
+        return () =>
+            (<div class="hexagrid-container" 
+                    style={state.style} 
+                    ref="el">
+                { getRows() }
+            </div>)
     },
 }
 </script>

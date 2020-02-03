@@ -1,5 +1,6 @@
 <script>
 import { getImageComponent } from '../../assets';
+import mainPageAccessor from '../mainPage/MainPageAccessor';
 
 // note to self, if I ever need to add collapsing of sections,
 // using external state storage like sessionStorage or vuex is necessary
@@ -13,7 +14,10 @@ export default {
             return getImageComponent(h, item.icon, { className: 'sidebar-itemIcon' });
         },
         getLink(h, page) {
-            return (<router-link class="sidebar-item" to={page.fullUrl} key={page.key}>
+            return (<router-link class="sidebar-item"
+                    to={page.fullUrl} 
+                    key={page.key}
+                    nativeOnClick={mainPageAccessor.closeSidebar}>
                 { this.getItemIcon(h, page) }
                 { page.label }
             </router-link>)

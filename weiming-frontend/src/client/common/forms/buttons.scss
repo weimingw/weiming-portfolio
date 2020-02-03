@@ -1,22 +1,30 @@
 @import '../colors.scss';
 
-button {
+input[type='button'] {
+    line-height: 2rem;
+}
+
+button,
+input[type='button'] {
     border: none;
     color: $light;
     background: darken( $dark, 7.5% );
     cursor: pointer;
 }
 
-button:hover:not(:disabled) {
+button:hover:not(:disabled),
+input[type='button']:hover:not(:disabled) {
     background: $darkMinus1;
 }
 
-button:disabled {
+button:disabled,
+input[type='button']:disabled {
     opacity: 0.5;
     cursor: default;
     pointer-events: none;
 }
 
-button.submit {
+button.submit,
+input[type='button'].submit {
     padding: 0.45rem;
 }

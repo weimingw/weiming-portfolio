@@ -1,13 +1,22 @@
 import debounce from 'lodash/debounce';
 import BaseNotifier from './BaseNotifier';
 
-class ResizeNotifier extends BaseNotifier {
+class ResizeNotifier {
     constructor() {
-        super();
+        this.notifier = new BaseNotifier();
+    }
+
+    attach(observers) {
+        if (observers.onResize)
+            this.notifier.attach(observers.onResize);
+    }
+
+    detach(observers) {
+        this.notifier.attach(observers.onResize);
     }
 
     notify = debounce((resizeEvt) => {
-        this.observers.forEach(ob => ob.receiveResize(resizeEvt));
+        this.notifier.notify(resizeEvt);
     }, 500)
 }
 

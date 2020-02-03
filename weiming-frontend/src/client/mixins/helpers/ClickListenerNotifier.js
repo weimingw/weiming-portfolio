@@ -1,12 +1,24 @@
 import BaseNotifier from './BaseNotifier';
 
-class ClickListenerNotifier extends BaseNotifier {
+class ClickListenerNotifier {
     constructor() {
-        super();
+        this.notifier = new BaseNotifier();
+    }
+
+    attach(observers) {
+        if (observers.onClick) {
+            this.notifier.attach(observers.onClick);
+        }
+    }
+
+    detach(observers) {
+        if (observers.onClick) {
+            this.notifier.detach(observers.onClick);
+        }
     }
 
     notify = (clickEvt) => {
-        this.observers.forEach(ob => ob.receiveClick(clickEvt));
+        this.notifier.notify(clickEvt);
     }
 }
 

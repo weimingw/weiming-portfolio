@@ -1,12 +1,14 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { createElement } from '@vue/composition-api';
 
 import {
     faBars, faCode, faUserCircle, faMale, faFileAlt, faList,
     faLaptopCode, faGamepad, faUserGraduate, faChalkboardTeacher, faChartLine,
     faAngleDown, faAngleUp, faBriefcase, faTools, faPlay, faPause, faVolumeUp,
     faSignInAlt, faUserCog, faMusic, faCarrot, faPlus, faTimes,
-    faUtensils, faCaretDown, faCheck,
+    faUtensils, faCaretDown, faCheck, faSave, faPlusSquare, faQuestionCircle,
+    faEgg, faClipboardList, faAward, faSquare
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -14,7 +16,8 @@ library.add(
     faLaptopCode, faGamepad, faUserGraduate, faChalkboardTeacher, faChartLine,
     faAngleDown, faAngleUp, faBriefcase, faTools, faPlay, faPause, faVolumeUp,
     faSignInAlt, faUserCog, faMusic, faCarrot, faPlus, faTimes, 
-    faUtensils, faCaretDown, faCheck, 
+    faUtensils, faCaretDown, faCheck, faSave, faPlusSquare, faQuestionCircle,
+    faEgg, faClipboardList, faAward, faSquare
 );
 
 import myIcon from './files/icon.svg';
@@ -28,10 +31,11 @@ import python from './files/python.svg';
 import hexagon from './files/hexagon.svg';
 import vegetables from './files/vegetables.svg';
 import polarChart from './files/polar_chart.svg';
+import challenge from './files/challenge.svg';
 import loading from './files/loading.gif';
 
 const iconMap = {
-    myIcon, vegas, javascript, node, cooking, react, vue, python, hexagon, vegetables, polarChart, loading
+    myIcon, vegas, javascript, node, cooking, react, vue, python, hexagon, vegetables, polarChart, loading, challenge
 }
 
 export function getIcon(key) {
@@ -44,7 +48,7 @@ export function getIcon(key) {
  * @param {*} key 
  * @param {*} opts 
  */
-export function getImageComponent(h, key='myIcon', opts={}) {
+export function getImageComponent(h=createElement, key='myIcon', opts={}) {
     let {
         className = '',
         style = {},

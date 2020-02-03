@@ -1,8 +1,11 @@
-import { NSDA_API_KEY } from '../secret';
+import throttle from 'lodash/throttle';
 import rp from "request-promise-native";
-import dailyRecommendation from '../../common/app/nutrition/dailyRecommendation';
 
-const RECOMMENDED_NUTRIENTS = new Set([... dailyRecommendation.keys()]);
+import { NSDA_API_KEY } from '../secret';
+import { createCachedFunction } from '../cache/index';
+import { dailyRecommendations } from '../../common/app/nutrition/nutritionCommon';
+
+const RECOMMENDED_NUTRIENTS = new Set([... dailyRecommendations.keys()]);
 
 const FOODDATA_CENTRAL_URL = `https://${NSDA_API_KEY}@api.nal.usda.gov/fdc/v1`;
 
@@ -59,31 +62,41 @@ class NutritionService {
     /* === END Search related methods === */
 
     /* === START Nutrition facts related methods === */
-    async getNutritionFacts(fdcId) {
+    getNutritionFacts = createCachedFunction(async (fdcId) => {
         if (fdcId) {                  
             const response = await rp({ 
                 url: `${FOODDATA_CENTRAL_URL}/${fdcId}`,
                 headers: { 'Content-Type': 'application/json' },
                 json: true,
             });
+
             const payload = this.createNutritionFactPayload(response);
             return payload;
         } 
         throw new Error('An error occurred when trying to get nutritional information. Please try again.');
-    }
+    }, 'getNutritionFacts', { maxSize: 100 })
 
     createNutritionFactPayload(foodData) {
         const nutrition = {
+            fdcId: foodData.fdcId,
             nutrients: foodData.foodNutrients
-                    .filter(item => RECOMMENDED_NUTRIENTS.has(item.nutrient.id) && item.dataPoints > 0)
+                    .filter(item => RECOMMENDED_NUTRIENTS.has(item.nutrient.id))
                     .reduce((acc, item) => {
                         acc[item.nutrient.id] = {
                             label: item.nutrient.name,
-                            amount: item.amount,
+                            amount: item.amount / 100,
                             unit: item.nutrient.unitName,
                         };
                         return acc;
                     }, {}),
+            units: [
+                { label: 'g', id: -1, gramWeight: 1 },
+                ... foodData.foodPortions.map(p => ({
+                    label: p.modifier,
+                    id: p.id,
+                    gramWeight: p.gramWeight,
+                })),
+            ],
         };
         return nutrition;
     }

@@ -18,13 +18,13 @@ export default {
         hasSession() {
             return this.user && this.session;
         },
-        renderContents(h, closeMenu) {
+        renderContents(h, collapse) {
             return this.hasSession() ?
-                this.getLoggedInContents(h, closeMenu) :
-                this.getLoggedOutContents(h, closeMenu);
+                this.getLoggedInContents(h, collapse) :
+                this.getLoggedOutContents(h, collapse);
         },
-        getLoggedInContents(h, closeMenu) {
-            return <div class="userMenu-menu" onClick={closeMenu}>
+        getLoggedInContents(h, collapse) {
+            return <div class="userMenu-menu" onClick={collapse}>
                 <router-link class="userMenu-menuItem"
                         to={endpoints.users.pages.update.fullUrl}>
                     Update your account
@@ -38,8 +38,8 @@ export default {
                 </router-link>
             </div>
         },
-        getLoggedOutContents(h, closeMenu) {
-            return <div class="userMenu-menu" onClick={closeMenu}>
+        getLoggedOutContents(h, collapse) {
+            return <div class="userMenu-menu" onClick={collapse}>
                 <router-link class="userMenu-menuItem"
                         to={endpoints.users.pages.login.fullUrl}>
                     Login

@@ -1,20 +1,39 @@
 import BaseNotifier from './BaseNotifier';
 
-class MouseListenerNotifier extends BaseNotifier {
+class MouseListenerNotifier {
     constructor() {
-        super();
+        this.mousemoveNotifier = new BaseNotifier();
+        this.mousedownNotifier = new BaseNotifier();
+        this.mouseupNotifier = new BaseNotifier();
+    }
+
+    attach(observers) {
+         if (observers.onMousedown)
+             this.mousedownNotifier.attach(observers.onMousedown);
+
+         if (observers.onMouseup)
+            this.mouseupNotifier.attach(observers.onMouseup);
+
+         if (observers.onMousemove)
+             this.mousemoveNotifier.attach(observers.onMousemove);
+    }
+
+    detach(observers) {
+        this.mousedownNotifier.detach(observers.onMousedown);
+        this.mouseupNotifier.detach(observers.onMouseup);
+        this.mousemoveNotifier.detach(observers.onMousemove);
     }
 
     notifyMousemove = (mouseEvt) => {
-        this.observers.forEach(ob => ob.receiveMousemove(mouseEvt));
+        this.mousemoveNotifier.notify(mouseEvt);
     }
 
     notifyMousedown = (mouseEvt) => {
-        this.observers.forEach(ob => ob.receiveMousedown(mouseEvt));
+        this.mousedownNotifier.notify(mouseEvt);
     }
 
     notifyMouseup = (mouseEvt) => {
-        this.observers.forEach(ob => ob.receiveMouseup(mouseEvt));
+        this.mouseupNotifier.notify(mouseEvt);
     }
 }
 

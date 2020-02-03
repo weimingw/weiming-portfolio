@@ -38,8 +38,8 @@ export default {
 
         const showAboveClass = this.showAbove ? 'showAbove' : '';
         const rightAlignClass = this.rightAlign ? 'rightAlign' : '';
-        const date = value ? new Date(value) : undefined;
-        if (date) date.setDate(date.getDate() + 1);
+        const date = value ? value.toUTCString() : undefined;
+        // if (date) date.setDate(date.getDate());
 
         return <VueDatePicker
                 ref='wrappedPicker'
@@ -50,6 +50,7 @@ export default {
                 inputClass={`datePicker-input ${inputClass}`}
                 value={date}
                 props={{ ...otherProps }}
+                useUtc={true}
         />
     },
 }

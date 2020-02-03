@@ -1,0 +1,22 @@
+@import '../../common/colors.scss';
+@import '../../common/sizes.scss';
+
+.tooltip-icon {
+    color: $blue;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.tooltip-contents {
+    width: 16rem;
+    font-size: 1.3rem;
+    margin-top: 0.5rem;
+}
+
+.tooltip-defaultContents {
+    padding: 1rem;
+}
+
+.tooltip-defaultContents > * {
+    margin-bottom: $size5;
+}

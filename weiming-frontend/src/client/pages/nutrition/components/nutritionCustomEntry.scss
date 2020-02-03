@@ -1,0 +1,76 @@
+@import '../../../common/colors.scss';
+
+$border: 1px solid $darkMinus4;
+
+.nutritionCustomEntry {
+    display: flex;
+    flex-direction: column;
+    border: $border;
+}
+
+.nutritionCustomEntry-instructions,
+.nutrientCustomEntry-row,
+.nutritionCustomEntry-label {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 0.5rem;
+}
+
+.nutritionCustomEntry-description {
+    padding-left: 0.5rem;
+    color: $orange;
+}
+
+.nutritionCustomEntry-instructions,
+.nutritionCustomEntry-description.edit {
+    background: $darkPlus1;
+    color: $orange;
+}
+
+.nutrientCustomEntry-row {
+    padding-right: 0.5rem;
+}
+
+.nutritionCustomEntry-labelInput {
+    padding: 0rem 0.5rem;
+}
+
+.nutrientCustomEntry-editRow {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nutrientCustomEntry-editRow-nutrient {
+    flex: 2;
+}
+
+.nutrientCustomEntry-editRow-amount {
+    flex: 1;
+    max-width: 30%;
+    text-align: right;
+    padding: 0 0.5rem;
+}
+
+.nutrientCustomEntry-editRow-unit {
+    flex: 0 6rem;
+}
+
+.nutrientCustomEntry-deleteIcon.nutrientCustomEntry-deleteIcon {
+    width: 3rem;
+    height: 3rem;
+    padding: 0.75rem;
+}
+
+.nutritionCustomEntry-row {
+    display: flex;
+    
+}
+
+.nutritionCustomEntry-addNutrient {
+    text-align: left;    
+}
+
+.nutritionCustomEntry-addNutrient > svg {
+    color: $green;
+    margin-right: 0.5rem;
+}

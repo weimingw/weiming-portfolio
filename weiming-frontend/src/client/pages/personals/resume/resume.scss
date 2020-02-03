@@ -1,129 +1,144 @@
 @import '../../../common/colors.scss';
 
+$darkGreen: green;
+$darkGreen: green;
+$darkGreen: green;
+$darkGreen: green;
+$darkGreen: green;
+
 $sectionMargin: 2rem;
 
-.resume {
+.resume.resume.resume.resume {
+    padding: 5rem 6rem;
+}
+
+.resume > section + section {
+    margin-top: 1rem;
+}
+
+.resume-me {
+    padding: 0.25rem;
+}
+
+.resume-me > * {
     display: flex;
-    line-height: 2em;
-    min-height: fit-content;
-    height: 120rem; // used to make it look better when trying to print
-    width: 100%;
-    padding-top: 0rem;
-}
-
-.resume-leftColumn > * {
-    max-width: 38.4rem;
-    float: right;
-}
-
-.resume-rightColumn > * {
-    max-width: 57.6rem;
-    padding-right: 5.5rem;
-}
-
-.resume-leftColumn > *,
-.resume-rightColumn > * {
-    display: flex;
-    flex-direction: column;
-    min-height: fit-content;
-    padding: 6.5rem 3.5rem;
-    padding-left: 5.5rem;
-}
-
-.resume-leftColumn {
-    flex: 2 0rem;
-}
-
-.resume-leftColumn * {
-    color: white;
-}
-
-.resume-rightColumn {
-    background: white;
-    flex: 3 0rem;
-}
-
-.resume-rightColumn * {
-    color: $dark;
-}
-
-.resume-sectionHeader {
-    position: relative;
-}
-
-.resume-icon.resume-icon.resume-icon {
-    width: 1.5rem;
-    height: 100%;
-    position: absolute;
-    left: -2.1rem;
-}
-
-.resume-header {
-    min-height: 4rem;
-}
-
-.resume-header > * {
-    align-self: center;
-}
-
-.resume-section + .resume-section {
-    margin-top: $sectionMargin;
-}
-
-.resume-row {
-    display: flex;
-    justify-content: space-between;
-}
-
-.resume-row > * + * {
-    margin-left: 3rem;
-}
-
-.resume-row > *:last-child {
-    text-align: right;
-}
-
-.resume-workExperienceSection + .resume-workExperienceSection {
-    margin-top: 1.25rem;
-}
-
-.resume-list {
-    list-style-position: outside;
-    padding-left: 2rem;
+    justify-content: center;
 }
 
 .resume-link {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
 }
 
-@media screen and (max-width: 64rem / 16 * 10) {
-    .resume {
-        flex-direction: column; // make it one column
+.resume-school > * {
+    margin-right: 1rem;
+}
+
+.resume-skills-categorySection {
+    display: flex;
+}
+
+.resume-skills-skillPill {
+    padding: 0.5rem 1rem;
+    margin: 0rem 0.25rem;
+    border: 0px;
+    border-radius: 3rem;
+    color: $light;
+    line-height: normal;
+}
+
+.resume-skills-subsection {
+    margin-top: 0.25rem;
+}
+
+.resume-section-header {
+    margin-bottom: 0.5rem;
+    border-bottom: 0.1rem solid $orange;
+}
+
+.resume-skills-separator {
+    margin-right: 0.5rem;
+}
+
+.resume-skills-skillPill.level-3 {
+    background-color: $lmGreen;
+}
+
+.resume-skills-skillPill.level-2 {
+    background-color: $lmBlue;
+}
+
+.resume-skills-skillPill.level-1 {
+    background-color: $lmPurple;
+}
+
+.resume-skills-skillPill.level-0 {
+    background-color: $lmRed;
+}
+
+.resume-legend > * {
+    margin-right: 3rem;
+}
+
+.resume-work-entry {
+    padding: 0rem 0.25rem 0.5rem 0.25rem;
+    border-radius: 2rem;
+}
+
+.resume-work-descriptionContainer {
+    padding-top: 0.5rem;
+    border-top: 0.1rem solid $yellow;
+}
+
+// I'm bodging this so that I can have an easy way to get a printable resume...
+// This is in no way indicative of my standards for CSS style formatting!
+.resume.resume.printMode {
+    background: white;
+
+    .resume-name.resume-name, .resume-tagline.resume-tagline {
+        font-weight: 900;
     }
 
-    .resume-leftColumn,
-    .resume-rightColumn {
-        max-width: 48rem;
+    .resume-school, .resume-work-entry, .resume-legend-text {
+        color: $dark;
     }
 
-    .resume-leftColumn > * {
-        padding: 6.5rem 3.5rem 0rem 3.5rem;
-        float: left;
+    .resume-me {
+        background: $lmBlue;
     }
 
-    .resume-rightColumn {
-        background: unset;
-    }
-
-    .resume-rightColumn > * {
-        padding: $sectionMargin 3.5rem 6.5rem 3.5rem;
-    }
-
-    .resume-rightColumn * {
+    .resume-me * {
         color: white;
     }
 
-    .resume-header {
-        min-height: 0rem; // not needed to sync height between columns when it's one column
+    h4 {
+        color: $lmBlue;
     }
-}
+
+    h5 {
+        color: $lmGreen;
+    }
+
+    .resume-skills-skillPill {
+        color: white;
+    }
+
+    .resume-work-entry {
+        padding: 0.75rem;
+    }
+
+    .resume-work-entry + .resume-work-entry {
+        margin-top: 0.2rem;
+    }
+    
+    .resume-work-descriptionContainer {
+        border-top: 0.1rem solid $lmBlue;
+    }
+
+    .resume-skills-skillPill.level-null {
+        color: $dark;
+    }
+
+    .resume-section-header {
+        border-bottom: 0.1rem solid $lmBlue;
+    }
+} 

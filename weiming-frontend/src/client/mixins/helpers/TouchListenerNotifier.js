@@ -1,20 +1,39 @@
 import BaseNotifier from './BaseNotifier';
 
-class TouchListenerNotifier extends BaseNotifier {
+class TouchListenerNotifier {
     constructor() {
-        super();
+        this.touchstartNotifier = new BaseNotifier();
+        this.touchendNotifier = new BaseNotifier();
+        this.touchmoveNotifier = new BaseNotifier();
+    }
+
+    attach(observers) {
+        if (observers.onTouchstart)
+            this.touchstartNotifier.attach(observers.onTouchstart);
+
+        if (observers.onTouchend)
+            this.touchendNotifier.attach(observers.onTouchend);
+
+        if (observers.onTouchmove)
+            this.touchmoveNotifier.attach(observers.onTouchmove);
+    }
+
+    detach(observers) {
+        this.touchendNotifier.detach(observers.onTouchend);
+        this.touchstartNotifier.detach(observers.onTouchstart);
+        this.touchmoveNotifier.detach(observers.onTouchmove);
     }
 
     notifyTouchmove = (touchEvt) => {
-        this.observers.forEach(ob => ob.receiveTouchmove(touchEvt));
+        this.touchmoveNotifier.notify(touchEvt);
     }
 
     notifyTouchstart = (touchEvt) => {
-        this.observers.forEach(ob => ob.receiveTouchstart(touchEvt));
+        this.touchstartNotifier.notify(touchEvt);
     }
 
     notifyTouchend = (touchEvt) => {
-        this.observers.forEach(ob => ob.receiveTouchend(touchEvt));
+        this.touchendNotifier.notify(touchEvt);
     }
 }
 

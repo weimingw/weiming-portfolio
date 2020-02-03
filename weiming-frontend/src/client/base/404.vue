@@ -1,20 +1,18 @@
 <script>
-import PageMixin from '../mixins/PageMixin';
+import { createElement as h } from '@vue/composition-api';
+import { usePageConfiguration } from '../mixins/PageMixin';
 
 export default {
-    mixins: [PageMixin],
-    methods: {
-        getHeaderProps() {
-            return {
-                title: 'Error'
-            }
-        }
+    setup(props, context) {
+        usePageConfiguration({
+            headerProps: { title: 'Error' },
+        });
+
+        return () => 
+            (<div class="main-page pageNotFound layout-oneColumn">
+                <h2>Page Not Found</h2>
+                An obligatory page.
+            </div>)
     },
-    render(h) {
-        return (<div class="main-page pageNotFound layout-oneColumn">
-            <h2>Page Not Found</h2>
-            An obligatory page.
-        </div>)
-    }
 }
 </script>

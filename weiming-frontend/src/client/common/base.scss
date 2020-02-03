@@ -13,10 +13,11 @@
 @import './animations/index.scss';
 
 $scrollbarWidth: 1rem;
+$fontFamily: Input Sans Compressed;
 
 html {
     font-size: 10px;
-    font-family: Arima Madurai;
+    font-family: $fontFamily;
 }
 
 html * {
@@ -25,7 +26,8 @@ html * {
     // min-width: 0;
 }
 
-html *:not(input, textarea) {
+html *:not(input, textarea),
+html input[type='button'] {
     line-height: 2em;
 }
 
@@ -111,7 +113,6 @@ h6 {
 
 .clickable {
     cursor: pointer;
-    
 }
 
 .clickable:hover {
@@ -120,4 +121,8 @@ h6 {
 
 ul {
     padding-left: 2rem;
+}
+
+.hidden {
+    display: none;
 }

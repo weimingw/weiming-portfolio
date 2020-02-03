@@ -1,9 +1,9 @@
 <script>
 import './slider.scss';
-import MouseAndTouchListenerMixin from '../../mixins/MouseAndTouchListenerMixin';
+import { useMouseAndTouchListener } from '../../mixins/EventListeners';
+import { createElement as h, reactive } from '@vue/composition-api';
 
 export default {
-    mixins: [MouseAndTouchListenerMixin],
     props: {
         horizontal: {
             type: Boolean,
@@ -27,64 +27,73 @@ export default {
             dragging: false,
         }
     },
-    methods: {
-        calculateCoordinates(evt) {
-            let { x, y, width, height } = this.$refs.area.getBoundingClientRect();
+    setup(props, context) {
+        const state = reactive({
+            dragging: false
+        });
+
+        function calculateCoordinates(evt) {
+            let { x, y, width, height } = context.refs.area.getBoundingClientRect();
             let evtX = evt.touches ? evt.touches[0].pageX : evt.pageX; // handle both mousedown and touch events
             let evtY = evt.touches ? evt.touches[0].pageY : evt.pageY;
             if (evtX !== undefined && evtY !== undefined) {
                 let sliderX = Math.min(Math.max(0, (evtX - x) / width), 1);
                 let sliderY = (1 - Math.min(Math.max(0, (evtY - y) / height), 1));
-                this.$emit('sliderChange', { x: sliderX, y: sliderY });
+                context.emit('sliderChange', { x: sliderX, y: sliderY });
             }
-        },
-        move(evt) {
-            if (this.dragging) {
-                this.calculateCoordinates(evt);
+        };
+
+        function move(evt) {
+            if (state.dragging) {
+                calculateCoordinates(evt);
                 evt.preventDefault();
             }
-        },
-        receiveMousemove(evt) {
-            this.move(evt);
-        },
-        receiveTouchmove(evt) {
-            this.move(evt);
-        },
+        };
 
-        startDrag(evt) {
-            this.dragging = true;
-            this.calculateCoordinates(evt);
-        },
-        receiveMousedown(evt) {
-            if (this.$el.contains(evt.target)) {
-                this.startDrag(evt);
-            }
-        },
-        receiveTouchstart(evt) {
-            if (this.$el.contains(evt.touches[0].target)) {
-                this.startDrag(evt);
-            }
-        },
+        function startDrag(evt) {
+            state.dragging = true;
+            calculateCoordinates(evt);
+        };
 
-        endDrag(evt) {
-            if (this.dragging) {
-                this.dragging = false;
-                this.calculateCoordinates(evt);
+        function endDrag(evt) {
+            if (state.dragging) {
+                state.dragging = false;
+                calculateCoordinates(evt);
             }
-        },
-        receiveMouseup(evt) {
-            this.endDrag(evt);
-        },
-        receiveTouchend(evt) {
-            this.dragging = false;
-        }
+        };
+
+        useMouseAndTouchListener({
+            onMousemove(evt) {
+                move(evt);
+            },
+            onTouchmove(evt) {
+                move(evt);
+            },
+            onMousedown(evt) {
+                if (context.refs.el.contains(evt.target)) {
+                    startDrag(evt);
+                }
+            },
+
+            onTouchstart(evt) {
+               if (context.refs.el.contains(evt.touches[0].target)) {
+                    startDrag(evt);
+                }
+            },
+            onMouseup(evt) {
+                endDrag(evt);
+            },
+            onTouchend(evt) {
+                state.dragging = false;
+            },
+        });
+
+        return () => 
+            (<div ref="el" class="slider">
+                <div class="slider-area" ref="area">
+                    { props.renderContents(h, props.x, props.y) }
+                </div>
+            </div>);
     },
-    render(h) {
-        return <div class="slider">
-            <div class="slider-area" ref="area">
-                { this.renderContents(h, this.x, this.y) }
-            </div>
-        </div>
-    }
 }
 </script>

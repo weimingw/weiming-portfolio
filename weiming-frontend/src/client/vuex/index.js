@@ -11,7 +11,7 @@ const vuexLocal = new VuexPersistence({
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
     state,
     mutations,
     actions,
@@ -20,6 +20,14 @@ export default new Vuex.Store({
     ],
 });
 
+const useStore = function() {
+    return store;
+}
+
+export default store;
+
 export {
     actionKeys,
+    useStore,
 };
+

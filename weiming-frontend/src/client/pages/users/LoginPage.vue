@@ -22,7 +22,8 @@ export default {
                 this.getEmailField(h),
                 this.getPasswordField(h),
                 this.getSubmitButton(h),
-                <router-link class='usersPage-link' 
+                <p class='usersPage-paragraph'>... or use a sample account: 'user@example.com' and 'password'</p>,
+                <router-link class='usersPage-paragraph usersPage-link' 
                         to={{
                             path: endpoints.users.pages.create.fullUrl,
                             query: { redirect: this.redirectObj }

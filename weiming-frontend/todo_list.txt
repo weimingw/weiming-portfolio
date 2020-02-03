@@ -1,0 +1,6 @@
+Make dropdown auto left or right align based on amount of space
+Make it possible to tab out of select
+Make select search when you type characters
+Make select contents scroll when you arrow-key navigate
+    
+Add round bits to left and right side of progress bar

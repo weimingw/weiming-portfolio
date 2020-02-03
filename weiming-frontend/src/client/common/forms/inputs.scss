@@ -1,11 +1,11 @@
 @import '../colors.scss';
 
 input {
-    line-height: normal;
+    height: 2em;
     background: $dark;
     border: none;
     border-bottom: 0.1rem solid $formItemBorderColor;
-    color: darken( $light, 5% );
+    color: $lightPlus2;
 }
 
 // for number inputs
